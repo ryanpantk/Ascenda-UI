@@ -1,6 +1,22 @@
+@import '~antd/dist/antd.css';
+
 .App {
   text-align: center;  
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.ant-btn-primary {
+  background: #20285d !important;
+  border-color: #20285d !important;
+  padding: 10px 32px !important;
+  height: auto !important;
+}
+
+.ant-btn-primary:hover {
+  background: #414ea3 !important;
+  border-color: #414ea3 !important;
+  padding: 10px 32px !important;
+  height: auto !important;
 }
 
 .destinationForm {
@@ -29,6 +45,7 @@
   display: block;
 }
 
+/* 
 .destinationForm button {
   background: #20285d;
   color: #fff;
@@ -36,7 +53,7 @@
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
-}
+} */
 
 .destination {
   margin:8px;
