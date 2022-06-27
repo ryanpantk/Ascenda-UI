@@ -1,17 +1,20 @@
+import { store } from '../store.js'
+
 const axios = require('axios');
 
-async function stripeCheckout() {
+export async function stripeCheckout() {
 
     let StripePayload = { name: 'John Doe', unit_amount: 1000 };
+    let resStripe = await axios.post('http://localhost:5000/apis/create-checkout-session', StripePayload);
+    let state = store.getState();
     let NodePayload = {
-        salutation: "Mr",
-        firstName: "Ryan",
-        lastName: "Pan",
-        countryCode: "SG",
-        phoneNumber: "97511537",
-        email: "ryanpantk@gmail.com",
-        specialRequests: "have fun",
-        paymentStatus: "unpaid",
+        salutation: state.salutation,
+        firstName: state.firstName,
+        lastName: state.lastName,
+        countryCode: state.countryCode,
+        phoneNumber: state.phoneNumber,
+        email: state.email,
+        specialRequests: state.specialRequest,
         destinationID: "req.body.destinationID",
         hotelID: "req.body.hotelID",
         numberOfNights: "req.body.numberOfNights",
@@ -23,15 +26,9 @@ async function stripeCheckout() {
         averagePrice: "req.body.averagePrice",
         totalPrice: "req.body.totalPrice"
     }
-    let resStripe = await axios.post('http://localhost:5000/apis/create-checkout-session', StripePayload);
     let data = resStripe.data;
     let {url, sessionID} = data;
     NodePayload.stripeID = sessionID;
     let resNode = await axios.post('http://localhost:5000/apis/postBooking', NodePayload);
-    console.log(data);
-    console.log(resNode);
     window.location = url
-
 }
-
-module.exports = {stripeCheckout}
