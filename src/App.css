@@ -19,6 +19,16 @@
   height: auto !important;
 }
 
+.ant-btn-default {
+  padding: 10px 32px !important;
+  height: auto !important;
+}
+
+.ant-btn-default:hover {
+  padding: 10px 32px !important;
+  height: auto !important;
+}
+
 .destinationForm {
   max-width: 400px;
   margin: 0 auto;

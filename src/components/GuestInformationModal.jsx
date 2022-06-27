@@ -1,21 +1,11 @@
 import {Button, Card, Form, Input, Select, Col, Row} from 'antd';
 import ReCAPTCHA from 'react-google-recaptcha';
 import JSONDATA from '../countryCode.json';
-import { stripeCheckout } from '../api';
+import { stripeCheckout } from '../middleware/BookingAPIs';
 
 // import { useSelector, useDispatch } from 'react-redux';
 const {TextArea} = Input;
 const { Option } = Select;
-const fakeData = {
-    hotelName: "Fullerton Hotel Singapore",
-    roomType: "Deluxe Plus",
-    numberOfRoom: 2,
-    numberOfAdult: 2,
-    numberOfChildren: 2,
-    checkinDate: "10/12/2022",
-    checkoutDate: "11/12/2022",
-    totalCost: 12.40
-}
 
 const GuestInformationModal = () => {
     const [form] = Form.useForm();
@@ -38,18 +28,22 @@ const GuestInformationModal = () => {
             form.setFieldsValue({
               salutation: 'Mr.',
             });
-            return;
+            break;
     
           case 'Ms.':
             form.setFieldsValue({
               salutation: 'Ms.',
             });
-            return;
+            break;
     
           case 'Mrs':
             form.setFieldsValue({
                 salutation: 'Mrs.',
             });
+            break;
+
+          default:
+            break;
         }
     };
 
@@ -72,41 +66,6 @@ const GuestInformationModal = () => {
 
     return (
         <Row>
-            <Col span={10} offset={7} style={{marginTop: 16, marginBottom: 16}}>
-                <Card title= {<h3> <b> Booking Summary</b></h3>} >
-                    <div style={{textAlign: "left"}}>
-                        <Row>
-                            <span style={{display:"block", fontWeight: "bold",fontSize: "large"}}>{fakeData.hotelName}</span>
-                        </Row>
-                        <Row>
-                            <span style={{display:"block", fontWeight: "bold",fontSize: "medium"}}>{fakeData.roomType}</span>
-                        </Row>
-                        <Row>
-                            <p style={{display:"block", fontWeight: "bold",fontSize: "medium"}}>${fakeData.totalCost.toFixed(2)}</p>
-                        </Row>
-                        <Row>
-                            <Col span={7} offset={0}>
-                                <p> <b>Number of Room :</b> {fakeData.numberOfRoom}</p>
-                            </Col>
-                            <Col span={7} offset={1}>
-                                <p><b>Number of Adult:</b> {fakeData.numberOfAdult}</p>
-                            </Col>
-                            <Col span={7} offset={1}>
-                                <p><b>Number of Children:</b> {fakeData.numberOfChildren}</p>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col span={7} offset={0}>
-                                <p><b>Check-in Date:</b> {fakeData.checkinDate}</p>
-                            </Col>
-                            <Col span={7} offset={1}>
-                                <p><b>Checkout-out Date:</b> {fakeData.checkoutDate}</p>
-                            </Col>
-                        </Row>
-
-                    </div>
-                </Card>
-            </Col>
             <Col span={10} offset={7} style={{marginTop: 16, marginBottom: 16}}>
                 <Card title= {<h3> <b> Guest Information </b></h3>} style={{fontWeight: "bold"}} >
                     <Form layout="vertical" form={form} name="control-hooks" onFinish={onFinish} requiredMark="optional">
@@ -170,14 +129,17 @@ const GuestInformationModal = () => {
                     </Form>
                 </Card>
             </Col>
-            <Col span={4} offset={10} style={{marginTop: 16, marginBottom: 16}}>
+            <Col span={4} offset={10} style={{marginTop: 12, marginBottom: 12}}>
                     <ReCAPTCHA
                         sitekey="6Led8p8gAAAAAArKHbSfNdm5eY_-WUul_86dCUbr"
                         onChange={onCaptcha}
                     />
             </Col>
+            <Col span={4} offset={10} style={{marginTop: 12}}>
+                <Button onClick={onReset} type="default" shape="default" size="large" style={{borderRadius: 15, width:220}}>Reset Fields</Button>
+            </Col>
             <Col span={4} offset={10} style={{marginTop: 16, marginBottom: 16}}>
-                <Button onClick={stripeCheckout} type="primary" shape="default" size="large" style={{borderRadius: 15}} htmlType="submit">Proceed for  Payment</Button>
+                <Button onClick={stripeCheckout} type="primary" shape="default" size="large" style={{borderRadius: 15, width:220}} htmlType="submit">Proceed for  Payment</Button>
             </Col>
         </Row>
     );
