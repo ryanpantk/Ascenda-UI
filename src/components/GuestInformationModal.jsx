@@ -1,11 +1,22 @@
-import {Button, Card, Form, Input, Select, Col, Row} from 'antd';
+import { Button, Card, Form, Input, Select, Col, Row, notification } from 'antd';
 import ReCAPTCHA from 'react-google-recaptcha';
 import JSONDATA from '../countryCode.json';
 import { stripeCheckout } from '../middleware/BookingAPIs';
+import { store } from '../store';
+
+import { setSalutation, setFirstName, setLastName, setCountryCode, setPhoneNumber, setEmail, setSpecialRequest } from '../middleware/actions/'
 
 // import { useSelector, useDispatch } from 'react-redux';
 const {TextArea} = Input;
 const { Option } = Select;
+const openNotificationWithIcon = (placement) => {
+    notification.error({
+      message: `Error`,
+      description:
+        'Please fill in all required information.',
+      placement,
+    });
+};
 
 const GuestInformationModal = () => {
     const [form] = Form.useForm();
@@ -43,12 +54,27 @@ const GuestInformationModal = () => {
             break;
 
           default:
+            form.setFieldsValue({
+                salutation: null,
+            });
             break;
         }
     };
 
     const onFinish = (values) => {
-        console.log(values);
+        if (validation(values)) {
+            triggerNotif();
+        } else {
+            console.log(values);
+            store.dispatch(setSalutation(values.salutation));
+            store.dispatch(setFirstName(values.firstName));
+            store.dispatch(setLastName(values.lastName));
+            store.dispatch(setCountryCode(values.countryCode));
+            store.dispatch(setPhoneNumber(values.phoneNumber));
+            store.dispatch(setEmail(values.email));
+            store.dispatch(setSpecialRequest(values.specialRequest));
+            stripeCheckout();
+        }
     };
 
     const onReset = () => {
@@ -64,11 +90,21 @@ const GuestInformationModal = () => {
      
     };
 
+    const triggerNotif = () => openNotificationWithIcon('bottomRight');
+
+    function validation(values) {
+        if (values.salutation == null || values.firstName == null || values.lastName == null|| values.countryCode == null|| values.phoneNumber == null|| values.email == null) {
+            return true;
+        }
+        return false;
+    }
+     
     return (
-        <Row>
-            <Col span={10} offset={7} style={{marginTop: 16, marginBottom: 16}}>
-                <Card title= {<h3> <b> Guest Information </b></h3>} style={{fontWeight: "bold"}} >
-                    <Form layout="vertical" form={form} name="control-hooks" onFinish={onFinish} requiredMark="optional">
+        <Form layout="vertical" form={form} name="control-hooks" onFinish={onFinish} requiredMark="optional">
+            <Row>
+                <Col span={10} offset={7} style={{marginTop: 16, marginBottom: 16}}>
+                    <Card title= {<h3> <b> Guest Information </b></h3>} style={{fontWeight: "bold"}} >
+                        
                         <Row>
                             <Col span={4} offset={0}>
                                 <Form.Item name="salutation" label="Salutation" required>
@@ -126,22 +162,24 @@ const GuestInformationModal = () => {
                                 </Form.Item>
                             </Col>
                         </Row>
-                    </Form>
-                </Card>
-            </Col>
-            <Col span={4} offset={10} style={{marginTop: 12, marginBottom: 12}}>
-                    <ReCAPTCHA
-                        sitekey="6Led8p8gAAAAAArKHbSfNdm5eY_-WUul_86dCUbr"
-                        onChange={onCaptcha}
-                    />
-            </Col>
-            <Col span={4} offset={10} style={{marginTop: 12}}>
-                <Button onClick={onReset} type="default" shape="default" size="large" style={{borderRadius: 15, width:220}}>Reset Fields</Button>
-            </Col>
-            <Col span={4} offset={10} style={{marginTop: 16, marginBottom: 16}}>
-                <Button onClick={stripeCheckout} type="primary" shape="default" size="large" style={{borderRadius: 15, width:220}} htmlType="submit">Proceed for  Payment</Button>
-            </Col>
-        </Row>
+                        
+                    </Card>
+                </Col>
+                <Col span={4} offset={10} style={{marginTop: 12, marginBottom: 12}}>
+                        <ReCAPTCHA
+                            sitekey="6Led8p8gAAAAAArKHbSfNdm5eY_-WUul_86dCUbr"
+                            onChange={onCaptcha}
+                        />
+                </Col>
+                <Col span={4} offset={10} style={{marginTop: 12}}>
+                    <Button onClick={onReset} type="default" shape="default" size="large" style={{borderRadius: 15, width:220}}>Reset Fields</Button>
+                </Col>
+                <Col span={4} offset={10} style={{marginTop: 16, marginBottom: 16}}>
+                    <Button type="primary" shape="default" size="large" style={{borderRadius: 15, width:220}} htmlType="submit">Proceed for  Payment</Button>
+                </Col>
+            </Row>
+
+        </Form>
     );
 }
 

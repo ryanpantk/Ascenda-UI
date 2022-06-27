@@ -1,6 +1,7 @@
 import {Card, Col, Row} from 'antd';
 
-// import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+
 const fakeData = {
     hotelName: "Fullerton Hotel Singapore",
     roomType: "Deluxe Plus",
@@ -12,9 +13,7 @@ const fakeData = {
     totalCost: 12.40
 }
 
-
 const BookingSummary = () => {
-
     return (
         <Row>
             <Col span={10} offset={7} style={{marginTop: 16, marginBottom: 16}}>
