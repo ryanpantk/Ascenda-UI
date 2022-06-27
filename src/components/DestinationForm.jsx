@@ -30,56 +30,42 @@ const DestinationForm = () => {
                 <DestinationSearchBar
                     onChange={(e) => setDestination(e)}
                 ></DestinationSearchBar>
-                <div className="in-line">
-                    <div>
-                        <label>Check-In</label>
-                        <DatePicker
-                            selected={checkInDate}
-                            onChange={(date) => setCheckInDate(date)}
-                            selectsStart
-                            startDate={checkInDate}
-                            dateFormat='dd/MM/yy'
-                        ></DatePicker>
-                    </div>
-                    <div>
-                        <label>Check-Out</label>
-                        <DatePicker
-                            selected={Math.max(checkInDate, checkOutDate)}
-                            onChange={(date) => setCheckOutDate(date)}
-                            selectsEnd
-                            startDate={checkInDate}
-                            endDate={checkOutDate}
-                            minDate={checkInDate}
-                            dateFormat='dd/MM/yy'
-                        ></DatePicker>
-                    </div>
-                </div>
-                <div className="in-line">
-                    <div>
-                        <label>Rooms</label>
-                        <input
-                            type="number"
-                            value={rooms}
-                            onChange={(e) => setRooms(e.target.value)}
-                        ></input>
-                    </div>
-                    <div>
-                        <label>Adults</label>
-                        <input
-                            type="number"
-                            value={adults}
-                            onChange={(e) => setAdults(e.target.value)}
-                        ></input>
-                    </div>
-                    <div>
-                        <label>Children</label>
-                        <input
-                            type="number"
-                            value={children}
-                            onChange={(e) => setChildren(e.target.value)}
-                        ></input>
-                    </div>
-                </div>
+                <label>Check-In</label>
+                <DatePicker
+                    selected={checkInDate}
+                    onChange={(date) => setCheckInDate(date)}
+                    selectsStart
+                    startDate={checkInDate}
+                    dateFormat='dd/MM/yy'
+                ></DatePicker>
+                <label>Check-Out</label>
+                <DatePicker
+                    selected={Math.max(checkInDate, checkOutDate)}
+                    onChange={(date) => setCheckOutDate(date)}
+                    selectsEnd
+                    startDate={checkInDate}
+                    endDate={checkOutDate}
+                    minDate={checkInDate}
+                    dateFormat='dd/MM/yy'
+                ></DatePicker>
+                <label>Rooms</label>
+                <input
+                    type="number"
+                    value={rooms}
+                    onChange={(e) => setRooms(e.target.value)}
+                ></input>
+                <label>Adults</label>
+                <input
+                    type="number"
+                    value={adults}
+                    onChange={(e) => setAdults(e.target.value)}
+                ></input>
+                <label>Children</label>
+                <input
+                    type="number"
+                    value={children}
+                    onChange={(e) => setChildren(e.target.value)}
+                ></input>
                 <button type="submit" className="submitButton">Search Hotels</button>
             </form>
         </div>
