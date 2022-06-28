@@ -55,8 +55,7 @@
   display: block;
 }
 
-/* 
-.destinationForm button {
+.submitButton {
   background: #20285d;
   color: #fff;
   border: 0;

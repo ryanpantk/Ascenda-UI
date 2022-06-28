@@ -34,11 +34,19 @@ const DestinationForm = () => {
                 <DatePicker
                     selected={checkInDate}
                     onChange={(date) => setCheckInDate(date)}
+                    selectsStart
+                    startDate={checkInDate}
+                    dateFormat='dd/MM/yy'
                 ></DatePicker>
                 <label>Check-Out</label>
                 <DatePicker
-                    selected={checkOutDate}
+                    selected={Math.max(checkInDate, checkOutDate)}
                     onChange={(date) => setCheckOutDate(date)}
+                    selectsEnd
+                    startDate={checkInDate}
+                    endDate={checkOutDate}
+                    minDate={checkInDate}
+                    dateFormat='dd/MM/yy'
                 ></DatePicker>
                 <label>Rooms</label>
                 <input
@@ -58,7 +66,7 @@ const DestinationForm = () => {
                     value={children}
                     onChange={(e) => setChildren(e.target.value)}
                 ></input>
-                <button type="submit">Search Hotels</button>
+                <button type="submit" className="submitButton">Search Hotels</button>
             </form>
         </div>
     );
