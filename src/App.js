@@ -1,13 +1,78 @@
 import './App.css';
+import { useState } from 'react';
 import DestinationForm from './components/DestinationForm.jsx';
 import BookingPage from './components/BookingPage/BookingPage.jsx';
+import { Button, message, Steps } from 'antd';
+const { Step } = Steps;
+const steps = [
+  {
+    title: 'Enter Destination',
+  },
+  {
+    title: 'Choose hotel room',
+  },
+  {
+    title: 'Enter Payment Details',
+  },
+];
 
 function App() {
+  const [current, setCurrent] = useState(0);
+  const [destinationData, setDestinationData] = useState(null);
+
+  const next = () => {
+    setCurrent(current + 1);
+  };
+
+  const prev = () => {
+    setCurrent(current - 1);
+  };
+
+  const handleDestinationSubmit = (data) => {
+    setDestinationData(data);
+    next();
+  }
+
+  const handleStepperClick = (idx) => {
+    if(idx < current){
+      setCurrent(idx);
+    }
+  }
+
   return (
-    <div className="App">
-      {/* <DestinationForm></DestinationForm> */}
-      <BookingPage></BookingPage>
-    </div>
+    <>
+      <Steps className="steps-bar" current={current}>
+        {steps.map((item, idx) => (
+          <Step key={item.title} title={item.title} onClick={(e) => handleStepperClick(idx)}/>
+        ))}
+      </Steps>
+      <div className="steps-content">
+        {current == 0 && (
+          <DestinationForm onSubmit={(e) => handleDestinationSubmit(e)}></DestinationForm>
+        )}
+        {current == 1 && (
+          <div>Second Page</div>
+        )}
+        {current == 2 && (
+          <BookingPage></BookingPage>
+        )}
+      </div>
+      <div className="steps-action">
+        {current < steps.length - 1 && (
+          <Button type="primary" onClick={() => next()}>
+            Next
+          </Button>
+        )}
+        {current > 0 && (
+          <Button
+            style={{
+              margin: '0 8px',
+            }}
+            onClick={() => prev()}
+          >Previous</Button>
+        )}
+      </div>
+    </>
   );
 }
 
