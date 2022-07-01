@@ -1,7 +1,10 @@
-import {Card, Col, Row} from 'antd';
+import {Button, Card, Col, Row} from 'antd';
+import {useState} from "react";
+
 
 // import { useSelector, useDispatch } from 'react-redux';
 const fakeData = {
+    
     roomtype: "Suite with Double Bed",
     additionalinfo: "Breakfast included",
     refundstatus: "Refundable",
@@ -16,7 +19,30 @@ const fakeData = {
 }
 
 
+
+
+
+
 const RoomDetails = () => {
+    let roomtype = "hi"
+    
+    const axios = require('axios');
+    
+    // const test = (res) => {
+    //     roomtype = res;
+    // }
+
+    // const [joke,setJoke] = useState("");
+        
+    axios
+    .get("https://hotelapi.loyalty.dev/api/hotels/diH7")
+    .then(function (response) {
+        roomtype = response.data.name;
+        // test(JSON.stringify(response.data.name));
+        // setJoke(response.data.name);
+    });
+
+
 
     return (
         <Row>
@@ -24,33 +50,25 @@ const RoomDetails = () => {
                 <Card title= {<h3> <b> RoomDetails</b></h3>} >
                     <div style={{textAlign: "left"}}>
                         <Row>
-                            <span style={{display:"block", fontWeight: "bold",fontSize: "large"}}>{fakeData.hotelName}</span>
+                            <span style={{display:"block", fontWeight: "bold",fontSize: "large"}}>{roomtype}</span>
                         </Row>
                         <Row>
-                            <span style={{display:"block", fontWeight: "bold",fontSize: "medium"}}>{fakeData.roomType}</span>
+                            <Col span={7} offset={0}>
+                                <span style={{display:"block", fontWeight: "bold",fontSize: "large"}}>{fakeData.additionalinfo}</span>
+                            </Col>
+                            <Col span={4} offset={10} >
+                                <Button type="primary" shape="default" size="large" style={{borderRadius: 15, width:110}} >Select</Button>
+                            </Col>
+                            
+                        </Row>
+                        <Row>
+                            <span style={{display:"block", fontWeight: "bold",fontSize: "medium"}}>{fakeData.refundstatus}</span>
                         </Row>
                         <Row>
                             <p style={{display:"block", fontWeight: "bold",fontSize: "medium"}}>${fakeData.totalCost.toFixed(2)}</p>
                         </Row>
-                        <Row>
-                            <Col span={7} offset={0}>
-                                <p> <b>Number of Room :</b> {fakeData.numberOfRoom}</p>
-                            </Col>
-                            <Col span={7} offset={1}>
-                                <p><b>Number of Adult:</b> {fakeData.numberOfAdult}</p>
-                            </Col>
-                            <Col span={7} offset={1}>
-                                <p><b>Number of Children:</b> {fakeData.numberOfChildren}</p>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col span={7} offset={0}>
-                                <p><b>Check-in Date:</b> {fakeData.checkinDate}</p>
-                            </Col>
-                            <Col span={7} offset={1}>
-                                <p><b>Check-out Date:</b> {fakeData.checkoutDate}</p>
-                            </Col>
-                        </Row>
+                        
+                        
 
                     </div>
                 </Card>

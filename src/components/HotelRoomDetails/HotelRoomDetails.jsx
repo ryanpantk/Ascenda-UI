@@ -15,7 +15,8 @@ const HotelRoomDetails = () => {
             <HotelImage></HotelImage>
             <HotelRatings></HotelRatings>
             <RoomDetails></RoomDetails>
-            <HotelMap></HotelMap>
+            {/* <HotelMap></HotelMap> */}
+            
             
         </div>
     )
