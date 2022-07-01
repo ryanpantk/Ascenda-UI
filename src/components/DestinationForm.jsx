@@ -4,7 +4,7 @@ import DestinationSearchBar from "./DestinationSearchBar";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-const DestinationForm = () => {
+const DestinationForm = ({onSubmit}) => {
     const [destination, setDestination] = useState('Destination or Hotel');
     const [checkInDate, setCheckInDate] = useState(new Date());
     const [checkOutDate, setCheckOutDate] = useState(new Date());
@@ -14,12 +14,15 @@ const DestinationForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(destination);
-        console.log(checkInDate);
-        console.log(checkOutDate);
-        console.log(rooms);
-        console.log(adults);
-        console.log(children);
+        const destinationData = new Object();
+        destinationData.destination = destination;
+        destinationData.checkInDate = checkInDate;
+        destinationData.checkOutDate = checkOutDate;
+        destinationData.rooms = rooms;
+        destinationData.adults = adults;
+        destinationData.children = children;
+        console.log(destinationData);
+        onSubmit(destinationData);
     };
 
     return (
