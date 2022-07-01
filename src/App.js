@@ -13,6 +13,9 @@ const steps = [
     title: 'Choose hotel room',
   },
   {
+    title: 'hotel room details',
+  },
+  {
     title: 'Enter Payment Details',
   },
 ];
@@ -61,6 +64,9 @@ function App() {
           <HotelDisplay GetHotel={handleHotelSelect} DestinationData={destinationData}/>
         )}
         {current === 2 && (
+          <p>HotelDetails</p>
+        )}
+        {current === 3 && (
           <BookingPage></BookingPage>
         )}
       </div>
