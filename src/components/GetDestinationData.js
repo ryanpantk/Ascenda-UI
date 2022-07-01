@@ -1,19 +1,18 @@
-import JSONDATA from "../destinations.json";
+import moment from 'moment';
+
 
 const GetDestinationData = props =>{
     const destinationData = props;
-    var destinationID = JSONDATA.filter((val) => {
-        if (val.term === destinationData.destination){
-            return val.uid
-        }
-        return null;
-    })
-    const checkinDate = destinationData.checkInDate;
-    const checkoutDate = destinationData.checkOutDate;
+    const destinationID = destinationData.destination.uid;
+    const checkinDate = moment(destinationData.checkinDate).format('yyyy-MM-DD');
+    const checkoutDate = moment(destinationData.checkinDate).format('yyyy-MM-DD');
     const guestNumber = destinationData.adults+destinationData.children;
     const partnerID = '1' ;
+
+    console.log(checkinDate);
 
     return({destinationID,checkinDate,checkoutDate,guestNumber,partnerID})
 }
 
 export default GetDestinationData;
+

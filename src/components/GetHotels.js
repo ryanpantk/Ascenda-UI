@@ -1,26 +1,5 @@
 
 import React from 'react';
-//import destinationData from './GetDestinationData.js';
-
-
-/*const destinationID = destinationData.id;
-const checkinDate = destinationData.checkInDate;
-const checkoutDate = destinationData.checkOutDate;
-const guestNumber = destinationData.adults+destinationData.children;
-const partnerID = '1';
-
-//const currency
-//const lang
-
-async function GetHotelPriceList(){
-    const data = await fetch(`https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=${destinationID}&checkin=${checkinDate}&checkout=${checkoutDate}&guests=${guestNumber}&partner_id=${partnerID}`)
-    .then(response => response.json());
-    
-    const HotelPriceList = data.hotels;
-    return HotelPriceList;
-        }*/
-    
-
 
 export async function GetHotelList(props){
     const{destinationID,checkinDate,checkoutDate,guestNumber,partnerID}=props;
@@ -47,10 +26,10 @@ export async function GetHotelList(props){
 }
 
 
+//`https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=${destinationID}&checkin=${checkinDate}&checkout=${checkoutDate}&guests=${guestNumber}&partner_id=${partnerID}`
+//`https://hotelapi.loyalty.dev/api/hotels?destination_id=${destinationID}`
 
-
-
-
+//'https://hotelapi.loyalty.dev/api/',{method:'GET',headers:{accept:`hotels/prices?destination_id=${destinationID}&checkin=${checkinDate}&checkout=${checkoutDate}&guests=${guestNumber}&partner_id=${partnerID}`}}
 
 
 
