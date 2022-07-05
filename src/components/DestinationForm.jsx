@@ -34,10 +34,11 @@ const DestinationForm = ({onSubmit}) => {
     const [value, setValue] = useState([]);
 
     const onFinish = (values) => {
+        values.destination = store.getState().destinationID;
+        console.log(values);
         if (validation(values)) {
              triggerNotif();
-         } else {
-            console.log(values);
+         } else {;
             //redux
             store.dispatch(setStartDate(values.date[0].format("YYYY-MM-DD")));
             store.dispatch(setEndDate(values.date[1].format("YYYY-MM-DD")));
@@ -50,7 +51,7 @@ const DestinationForm = ({onSubmit}) => {
             setRooms(values.numberOfRoom);
             setAdults(values.numberOfAdult);
             setChildren(values.numberOfChild);
-            const destinationData = new {}();
+            const destinationData = new Object();
             destinationData.destination = destination;
             destinationData.checkInDate = checkInDate;
             destinationData.checkOutDate = checkOutDate;
@@ -64,7 +65,7 @@ const DestinationForm = ({onSubmit}) => {
     const triggerNotif = () => openNotificationWithIcon('bottomRight');
 
     function validation(values) {
-        if (values.destinationID == null || values.startDate == null || values.endDate == null|| values.NumRoom == null|| values.NumAdult == null|| values.NumChild == null) {
+        if (values.destination == null || values.date == null | values.numberOfRoom == null|| values.numberOfChild == null|| values.numberOfAdult == null) {
             return true;
         }
         return false;

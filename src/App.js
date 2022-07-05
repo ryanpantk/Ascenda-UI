@@ -3,6 +3,7 @@ import { useState } from 'react';
 import DestinationForm from './components/DestinationForm.jsx';
 import BookingPage from './components/BookingPage/BookingPage.jsx';
 import { Button, message, Steps } from 'antd';
+import HotelDisplay from './components/HotelDisplay.jsx';
 const { Step } = Steps;
 const steps = [
   {
@@ -12,6 +13,9 @@ const steps = [
     title: 'Choose hotel room',
   },
   {
+    title: 'hotel room details',
+  },
+  {
     title: 'Enter Payment Details',
   },
 ];
@@ -19,6 +23,7 @@ const steps = [
 function App() {
   const [current, setCurrent] = useState(0);
   const [destinationData, setDestinationData] = useState(null);
+  const [hotelData, setHotelData] = useState(null);
 
   const next = () => {
     setCurrent(current + 1);
@@ -39,6 +44,11 @@ function App() {
     }
   }
 
+  const handleHotelSelect = (hotel) =>{
+    setHotelData(hotel);
+    next();
+  }
+
   return (
     <>
       <Steps className="steps-bar" current={current}>
@@ -47,13 +57,16 @@ function App() {
         ))}
       </Steps>
       <div className="steps-content">
-        {current == 0 && (
+        {current === 0 && (
           <DestinationForm onSubmit={(e) => handleDestinationSubmit(e)}></DestinationForm>
         )}
-        {current == 1 && (
-          <div>Second Page</div>
+        {current === 1 && (
+          <HotelDisplay GetHotel={handleHotelSelect} DestinationData={destinationData}/>
         )}
-        {current == 2 && (
+        {current === 2 && (
+          <p>HotelDetails</p>
+        )}
+        {current === 3 && (
           <BookingPage></BookingPage>
         )}
       </div>
