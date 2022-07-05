@@ -27,10 +27,6 @@ export async function GetHotelList(props){
 }
 
 
-//`https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=${destinationID}&checkin=${checkinDate}&checkout=${checkoutDate}&guests=${guestNumber}&partner_id=${partnerID}`
-//`https://hotelapi.loyalty.dev/api/hotels?destination_id=${destinationID}`
-
-//'https://hotelapi.loyalty.dev/api/',{method:'GET',headers:{accept:`hotels/prices?destination_id=${destinationID}&checkin=${checkinDate}&checkout=${checkoutDate}&guests=${guestNumber}&partner_id=${partnerID}`}}
 
 
 

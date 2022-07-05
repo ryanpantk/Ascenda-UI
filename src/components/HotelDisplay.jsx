@@ -16,11 +16,12 @@ class HotelDisplay extends React.Component{
     HotelList = GetHotelList(this.destinationData);
 
     state={
-        hotellist: this.HotelList,
+        hotellist: HotelList,
         pageSize: 20,
         currentPage: 1,
     };
-
+    //Using local data since unable to make api call
+    //should be : hotellist: this.HotelList
 
     handleSelect = hotel =>{
         console.log(hotel);
