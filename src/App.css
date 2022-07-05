@@ -8,14 +8,14 @@
 .ant-btn-primary {
   background: #20285d !important;
   border-color: #20285d !important;
-  padding: 10px 32px !important;
+  padding: 8px 32px !important;
   height: auto !important;
 }
 
 .ant-btn-primary:hover {
   background: #414ea3 !important;
   border-color: #414ea3 !important;
-  padding: 10px 32px !important;
+  padding: 8px 32px !important;
   height: auto !important;
 }
 

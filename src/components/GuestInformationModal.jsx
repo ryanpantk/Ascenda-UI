@@ -3,7 +3,6 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import JSONDATA from '../countryCode.json';
 import { stripeCheckout } from '../middleware/BookingAPIs';
 import { store } from '../store';
-
 import { setSalutation, setFirstName, setLastName, setCountryCode, setPhoneNumber, setEmail, setSpecialRequest } from '../middleware/actions/'
 
 // import { useSelector, useDispatch } from 'react-redux';
@@ -29,7 +28,7 @@ const GuestInformationModal = () => {
         console.log('Captcha value:', value);
       }
       
-      const onSearch = (value) => {
+    const onSearch = (value) => {
         console.log('search:', value);
     };
 
@@ -104,7 +103,6 @@ const GuestInformationModal = () => {
             <Row>
                 <Col span={10} offset={7} style={{marginTop: 16, marginBottom: 16}}>
                     <Card title= {<h3> <b> Guest Information </b></h3>} style={{fontWeight: "bold"}} >
-                        
                         <Row>
                             <Col span={4} offset={0}>
                                 <Form.Item name="salutation" label="Salutation" required>

@@ -17,7 +17,7 @@ export async function stripeCheckout() {
         specialRequests: state.specialRequest,
         destinationID: "req.body.destinationID",
         hotelID: "req.body.hotelID",
-        numberOfNights: "req.body.numberOfNights",
+        numberOfRoom: "req.body.numberOfNights",
         startDate: "req.body.startDate",
         endDate: "req.body.endDate",
         numberOfAdult: "req.body.numberOfAdult",
