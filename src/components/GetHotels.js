@@ -1,9 +1,5 @@
-
-import React from 'react';
-
 export async function GetHotelList(props){
     const{destinationID,checkinDate,checkoutDate,guestNumber,partnerID}=props;
-    
 
     const priceData = await fetch(`https://hotelapi.loyalty.dev/api/hotels/prices?destination_id=${destinationID}&checkin=${checkinDate}&checkout=${checkoutDate}&guests=${guestNumber}&partner_id=${partnerID}`)
     .then(response => response.json())

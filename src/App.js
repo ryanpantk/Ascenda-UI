@@ -3,7 +3,7 @@ import { useState } from 'react';
 import DestinationForm from './components/DestinationForm.jsx';
 import BookingPage from './components/BookingPage/BookingPage.jsx';
 import { Button, message, Steps } from 'antd';
-import HotelDisplay from './components/HotelDisplay';
+import HotelDisplay from './components/HotelDisplay.jsx';
 const { Step } = Steps;
 const steps = [
   {
