@@ -46,7 +46,7 @@ const GuestInformationModal = () => {
             });
             break;
     
-          case 'Mrs':
+          case 'Mrs.':
             form.setFieldsValue({
                 salutation: 'Mrs.',
             });
@@ -60,7 +60,7 @@ const GuestInformationModal = () => {
         }
     };
 
-    const onFinish = (values) => {
+    async function onFinish (values) {
         if (validation(values)) {
             triggerNotif();
         } else {
@@ -72,7 +72,7 @@ const GuestInformationModal = () => {
             store.dispatch(setPhoneNumber(values.phoneNumber));
             store.dispatch(setEmail(values.email));
             store.dispatch(setSpecialRequest(values.specialRequest));
-            stripeCheckout();
+            await stripeCheckout();
         }
     };
 
@@ -106,7 +106,7 @@ const GuestInformationModal = () => {
                         <Row>
                             <Col span={4} offset={0}>
                                 <Form.Item name="salutation" label="Salutation" required>
-                                    <Select placeholder="" onChange={onSalutationChange} allowClear>
+                                    <Select onChange={onSalutationChange} allowClear>
                                         <Option value="Mr.">Mr.</Option>
                                         <Option value="Ms.">Ms.</Option>
                                         <Option value="Mrs.">Mrs.</Option>

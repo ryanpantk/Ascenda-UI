@@ -119,11 +119,10 @@ const DestinationForm = ({onSubmit}) => {
       }
 
     return (
-        <div style={{marginTop: 60}}>
-        <Form layout="vertical" form={form} name="control-hooks" onFinish={onFinish} requiredMark="optional" >
+        <Form layout="vertical" form={form} name="control-hooks" onFinish={onFinish} requiredMark="optional">
             <Row>
-                <Col span= {10} offset={7}>
-                    <Card style={{borderRadius:5, paddingTop:10, paddingBottom:10}}>
+                <Col span= {6} offset={9}>
+                    <Card style={{marginBottom:16}}>
                         <Row>
                             <Col span={24}>
                                 <Form.Item name="destination" required>
@@ -202,7 +201,6 @@ const DestinationForm = ({onSubmit}) => {
                 </Col>
             </Row>
         </Form>
-        </div>
     )
 
 }

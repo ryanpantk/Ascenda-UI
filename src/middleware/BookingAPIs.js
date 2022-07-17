@@ -5,30 +5,30 @@ const axios = require('axios');
 export async function stripeCheckout() {
 
     let StripePayload = { name: 'John Doe', unit_amount: 1000 };
-    let resStripe = await axios.post('http://localhost:5000/apis/create-checkout-session', StripePayload);
-    let state = store.getState();
+    let resStripe = await axios.post('http://localhost:5000/apis/create-checkout-session', StripePayload)
     let NodePayload = {
-        salutation: state.salutation,
-        firstName: state.firstName,
-        lastName: state.lastName,
-        countryCode: state.countryCode,
-        phoneNumber: state.phoneNumber,
-        email: state.email,
-        specialRequests: state.specialRequest,
-        destinationID: "req.body.destinationID",
+        salutation: store.getState().salutation,
+        firstName: store.getState().firstName,
+        lastName: store.getState().lastName,
+        countryCode: store.getState().countryCode,
+        phoneNumber: store.getState().phoneNumber,
+        email: store.getState().email,
+        specialRequests: store.getState().specialRequest,
+        destinationID: store.getState().destinationID,
         hotelID: "req.body.hotelID",
-        numberOfRoom: "req.body.numberOfNights",
-        startDate: "req.body.startDate",
-        endDate: "req.body.endDate",
-        numberOfAdult: "req.body.numberOfAdult",
-        numberOfChild: "req.body.numberOfChild",
+        numberOfRoom: store.getState().NumRoom,
+        startDate: store.getState().startDate,
+        endDate: store.getState().endDate,
+        numberOfAdult: store.getState().NumAdult,
+        numberOfChild: store.getState().NumChild,
         roomType: "req.body.roomType",
         averagePrice: "req.body.averagePrice",
         totalPrice: "req.body.totalPrice"
     }
     let data = resStripe.data;
-    let {url, sessionID} = data;
-    NodePayload.stripeID = sessionID;
-    let resNode = await axios.post('http://localhost:5000/apis/postBooking', NodePayload);
+    console.log(data);
+    let {url, payment_intent} = data;
+    NodePayload.stripeID = payment_intent;
+    await axios.post('http://localhost:5000/apis/postBooking', NodePayload);
     window.location = url
 }
