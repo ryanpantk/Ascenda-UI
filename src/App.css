@@ -1,6 +1,8 @@
 @import '~antd/dist/antd.css';
 
 .App {
+  width: 100%;
+  height: 100%;
   text-align: center;  
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -8,14 +10,14 @@
 .ant-btn-primary {
   background: #20285d !important;
   border-color: #20285d !important;
-  padding: 10px 32px !important;
+  padding: 8px 32px !important;
   height: auto !important;
 }
 
 .ant-btn-primary:hover {
   background: #414ea3 !important;
   border-color: #414ea3 !important;
-  padding: 10px 32px !important;
+  padding: 8px 32px !important;
   height: auto !important;
 }
 
@@ -67,4 +69,91 @@
 .destination {
   margin:8px;
   font-size:12px;
+}
+
+.steps-content {
+  margin-top: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  text-align: center;
+  background-color: #fafafa;
+  border: 1px  #e9e9e9;
+  border-radius: 2px;
+  height:'100%';
+  box-sizing: 'border-box';
+}
+
+.steps-action {
+  margin-top: 24px;
+}
+
+.steps-bar {
+  max-width: 80%;
+  margin: auto;
+}
+
+.ant-steps-item-active .anticon {
+  display: inline-block;
+  color: #20285d !important;
+  font-style: normal;
+  line-height: 32px !important;
+  text-align: top !important;
+  text-transform: none;
+  vertical-align:0 !important; 
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ant-steps-item .anticon {
+  font-size: 22px !important;
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.35);
+  font-style: normal;
+  line-height: 32px !important;
+  text-align: top !important;
+  text-transform: none;
+  vertical-align:0 !important; 
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ant-steps-small .ant-steps-item-title {
+  padding-right: 12px;
+  font-size: 16px;
+  padding-top: 2px !important;
+  line-height: 32px !important;
+}
+
+.ant-steps-item-active .ant-steps-item-title {
+  padding-right: 12px;
+  font-size: 16px;
+  line-height: 32px !important;
+  color: #20285d !important;
+  font-weight: bold;
+}
+
+.ant-steps-item-finish .ant-steps-item-tail {
+  color: #20285d !important;
+}
+
+.ant-steps-item-finish .anticon {
+  color: #20285d !important;
+  font-weight: bold;
+}
+
+.ant-steps-item-finish .ant-steps-item-title {
+  color: #20285d !important;
+  font-weight: bold;
+}
+
+.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title::after {
+  background-color: #20285d !important;
+  height:2px;
+}
+
+.ant-steps-item-title::after {
+  position: absolute !important;
+  top: 16px !important;
 }

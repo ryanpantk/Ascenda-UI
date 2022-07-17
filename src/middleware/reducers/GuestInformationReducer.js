@@ -61,3 +61,58 @@ export const specialRequestReducer = (state = "", action) => {
     }
 }
 
+export const destinationReducer = (state = null, action) => {
+    switch(action.type) {
+        case 'SETDEST':
+            return action.payload || null;
+        default:
+            return state;
+    }
+}
+
+export const startDateReducer = (state = null, action) => {
+    switch(action.type) {
+        case 'SETSTART':
+            return action.payload || null;
+        default:
+            return state;
+    }
+}
+
+export const endDateReducer = (state = null, action) => {
+    switch(action.type) {
+        case 'SETEND':
+            return action.payload || null;
+        default:
+            return state;
+    }
+}
+
+export const NumRoomReducer = (state = null, action) => {
+    switch(action.type) {
+        case 'SETNUMOFROOM':
+            return action.payload || null;
+        default:
+            return state;
+    }
+}
+
+export const NumAdultReducer = (state = null, action) => {
+    switch(action.type) {
+        case 'SETNUMOFADULT':
+            return action.payload || null;
+        default:
+            return state;
+    }
+}
+
+export const NumChildReducer = (state = null, action) => {
+    switch(action.type) {
+        case 'SETNUMOFCHILD':
+            return action.payload || null;
+        default:
+            return state;
+    }
+}
+
+

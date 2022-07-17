@@ -3,7 +3,6 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import JSONDATA from '../countryCode.json';
 import { stripeCheckout } from '../middleware/BookingAPIs';
 import { store } from '../store';
-
 import { setSalutation, setFirstName, setLastName, setCountryCode, setPhoneNumber, setEmail, setSpecialRequest } from '../middleware/actions/'
 
 // import { useSelector, useDispatch } from 'react-redux';
@@ -29,7 +28,7 @@ const GuestInformationModal = () => {
         console.log('Captcha value:', value);
       }
       
-      const onSearch = (value) => {
+    const onSearch = (value) => {
         console.log('search:', value);
     };
 
@@ -47,7 +46,7 @@ const GuestInformationModal = () => {
             });
             break;
     
-          case 'Mrs':
+          case 'Mrs.':
             form.setFieldsValue({
                 salutation: 'Mrs.',
             });
@@ -61,7 +60,7 @@ const GuestInformationModal = () => {
         }
     };
 
-    const onFinish = (values) => {
+    async function onFinish (values) {
         if (validation(values)) {
             triggerNotif();
         } else {
@@ -73,7 +72,7 @@ const GuestInformationModal = () => {
             store.dispatch(setPhoneNumber(values.phoneNumber));
             store.dispatch(setEmail(values.email));
             store.dispatch(setSpecialRequest(values.specialRequest));
-            stripeCheckout();
+            await stripeCheckout();
         }
     };
 
@@ -104,11 +103,10 @@ const GuestInformationModal = () => {
             <Row>
                 <Col span={10} offset={7} style={{marginTop: 16, marginBottom: 16}}>
                     <Card title= {<h3> <b> Guest Information </b></h3>} style={{fontWeight: "bold"}} >
-                        
                         <Row>
                             <Col span={4} offset={0}>
                                 <Form.Item name="salutation" label="Salutation" required>
-                                    <Select placeholder="" onChange={onSalutationChange} allowClear>
+                                    <Select onChange={onSalutationChange} allowClear>
                                         <Option value="Mr.">Mr.</Option>
                                         <Option value="Ms.">Ms.</Option>
                                         <Option value="Mrs.">Mrs.</Option>
