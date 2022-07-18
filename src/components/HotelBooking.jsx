@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { FlagOutlined, EnvironmentOutlined, BankOutlined, FormOutlined } from '@ant-design/icons';
-import DestinationForm from './DestinationForm.jsx';
-import BookingPage from './BookingPage/BookingPage.jsx';
 import { Button, Steps, Card,Col, Row } from 'antd';
+import DestinationForm from './DestinationForm.jsx';
 import HotelDisplay from './HotelDisplay.jsx';
+import HotelRoomDetails from './HotelRoomDetails/HotelRoomDetails.jsx';
+import BookingPage from './BookingPage/BookingPage.jsx';
 const { Step } = Steps;
 const steps = [
   {
@@ -40,6 +41,7 @@ function HotelBooking() {
 
   const next = () => {
     setCurrent(current + 1);
+    document.getElementById("scroll").scrollTo({ top: 0, behavior: 'smooth' }) ;
   };
 
   const prev = () => {
@@ -69,7 +71,7 @@ function HotelBooking() {
               <Step key={item.title} title={item.title} icon={item.icon} onClick={(e) => handleStepperClick(idx)}/>
             ))}
           </Steps>
-          <Card className="steps-content" style={{ background: (current===0) ? "url(https://api.vold.dev.fleava.com/pictures/5bfb719fa60b191fb4f81ea1/the_resort/14e7403f-7a95-4b9e-b175-815c3b325c5c.jpg) no-repeat" : "white", backgroundSize:"cover", height:'90%', boxSizing: 'border-box', opacity:1 }} >
+          <Card id="scroll" className="steps-content" style={{ background: (current===0) ? "url(https://api.vold.dev.fleava.com/pictures/5bfb719fa60b191fb4f81ea1/the_resort/14e7403f-7a95-4b9e-b175-815c3b325c5c.jpg) no-repeat" : "white", backgroundSize:"cover", height:'90%', boxSizing: 'border-box', opacity:1 }} >
             {current === 0 && (
               <DestinationForm onSubmit={(e) => handleDestinationSubmit(e)} style={{marginTop:60}}></DestinationForm>
             )}
@@ -77,7 +79,7 @@ function HotelBooking() {
               <HotelDisplay GetHotel={handleHotelSelect} DestinationData={destinationData} />
             )}
             {current === 2 && (
-              <p>HotelDetails</p>
+              <HotelRoomDetails key= {hotelData.id} hotelID={ hotelData.id }/> 
             )}
             {current === 3 && (
               <BookingPage></BookingPage>
