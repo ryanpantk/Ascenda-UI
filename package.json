@@ -2,7 +2,7 @@
   "name": "hotel-booking-webapp",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://hotelapi.loyalty.dev/api",
+  "proxy": "http://localhost:3000",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@googlemaps/js-api-loader": "^1.14.3",
