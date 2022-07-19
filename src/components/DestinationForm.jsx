@@ -35,7 +35,6 @@ const DestinationForm = ({onSubmit}) => {
 
     const onFinish = (values) => {
         values.destination = store.getState().destinationID;
-        console.log(values);
         if (validation(values)) {
              triggerNotif();
          } else {;

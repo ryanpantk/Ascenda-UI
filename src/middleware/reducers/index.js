@@ -1,4 +1,4 @@
-import { countryCodeReducer, emailReducer, firstNameReducer, lastNameReducer, phoneNumberReducer, salutationReducer, specialRequestReducer, destinationReducer, startDateReducer, endDateReducer, NumRoomReducer, NumAdultReducer, NumChildReducer } from './GuestInformationReducer';
+import { countryCodeReducer, emailReducer, firstNameReducer, lastNameReducer, phoneNumberReducer, salutationReducer, specialRequestReducer, destinationReducer, startDateReducer, endDateReducer, NumRoomReducer, NumAdultReducer, NumChildReducer, RoomTypeReducer } from './GuestInformationReducer';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
@@ -15,7 +15,8 @@ const rootReducer = combineReducers({
     countryCode: countryCodeReducer,
     phoneNumber: phoneNumberReducer,
     email: emailReducer,
-    specialRequest: specialRequestReducer
+    specialRequest: specialRequestReducer,
+    roomType: RoomTypeReducer
 })
 
 export default rootReducer;

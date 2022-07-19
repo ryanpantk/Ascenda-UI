@@ -90,3 +90,10 @@ export const setSpecialRequest = (item) => {
         payload: item
     };
 };
+
+export const setRoomType = (item) => {
+    return {
+        type: 'SETRT',
+        payload: item
+    };
+};

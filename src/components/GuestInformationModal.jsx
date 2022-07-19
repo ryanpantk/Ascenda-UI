@@ -101,7 +101,7 @@ const GuestInformationModal = () => {
     return (
         <Form layout="vertical" form={form} name="control-hooks" onFinish={onFinish} requiredMark="optional">
             <Row>
-                <Col span={10} offset={7} style={{marginTop: 16, marginBottom: 16}}>
+                <Col span={16} offset={4} style={{marginTop: 16, marginBottom: 16}}>
                     <Card title= {<h3> <b> Guest Information </b></h3>} style={{fontWeight: "bold"}} >
                         <Row>
                             <Col span={4} offset={0}>

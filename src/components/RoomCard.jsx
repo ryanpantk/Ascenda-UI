@@ -1,21 +1,21 @@
-import React from 'react'
-import { Button, Card, Col, Row, Carousel, Image } from 'antd';
+// import React from 'react'
+// import { Button, Card, Col, Row, Carousel, Image } from 'antd';
 
-function RoomCard(props) {
+// function RoomCard(props) {
 
-    let hotelRoom = props.hotelroom;
+//     let hotelRoom = props.hotelroom;
 
-    return (
+//     return (
 
-    <Card title="{hotelRoom.description}" style={{height:"100%", width:"100%"}}>
-        <div style={{height:'100%', boxSizing: 'border-box'}}>
-            Room Type 1
-        </div>
-    </Card>
+//     <Card title="{hotelRoom.description}" style={{height:"100%", width:"100%"}}>
+//         <div style={{height:'100%', boxSizing: 'border-box'}}>
+//             Room Type 1
+//         </div>
+//     </Card>
 
-    )
+//     )
 
-}
+// }
 
-export default RoomCard;
+// export default RoomCard;
 

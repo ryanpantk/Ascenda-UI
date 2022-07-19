@@ -115,4 +115,13 @@ export const NumChildReducer = (state = null, action) => {
     }
 }
 
+export const RoomTypeReducer = (state = null, action) => {
+    switch(action.type) {
+        case 'SETRT':
+            return action.payload || null;
+        default:
+            return state;
+    }
+}
+
 

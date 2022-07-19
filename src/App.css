@@ -21,6 +21,12 @@
   height: auto !important;
 }
 
+.ant-btn-secondary:hover {
+  border-color: #414ea3!important;
+  color: #414ea3!important;
+  transform: scale(1.1);
+}
+
 .ant-btn-default {
   padding: 10px 32px !important;
   height: auto !important;

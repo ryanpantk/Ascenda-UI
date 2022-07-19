@@ -16,7 +16,7 @@ const fakeData = {
 const BookingSummary = () => {
     return (
         <Row>
-            <Col span={10} offset={7} style={{marginTop: 16, marginBottom: 16}}>
+            <Col span={16} offset={4} style={{marginTop: 16, marginBottom: 16}}>
                 <Card title= {<h3> <b> Booking Summary</b></h3>} >
                     <div style={{textAlign: "left"}}>
                         <Row>

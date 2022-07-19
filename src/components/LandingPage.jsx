@@ -1,26 +1,25 @@
-import { Image, Button } from 'antd';
+import { Button } from 'antd';
 
 const myStyle={
     backgroundImage:"url('https://images.pexels.com/photos/615060/pexels-photo-615060.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
     height:'100vh',
-    // marginTop:'-70px',
     fontSize:'50px',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     display: 'flex',
-    alignItems: 'center',
-    height: '100vh',
+    alignItems: 'center'
 };
 
 const buttonStyle1={
-    backgroundColor:"#20285d",
+    backgroundColor:"green",
     border: "none",
     color: "white",
-    padding: "15px 32px",
+    padding: "25px 32px",
     textAlign: "center",
     textDecoration: "none",
     display: "inline-block",
-    fontSize: "16px"
+    fontSize: "16px",
+    marginRight: "16px",
 }
 
 const buttonStyle2={
