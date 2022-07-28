@@ -24,11 +24,11 @@ const disabledDate = (current) => {
 
 const DestinationForm = ({onSubmit}) => {
     const [destination, setDestination] = useState('Destination or Hotel');
-    const [checkInDate, setCheckInDate] = useState(new Date());
-    const [checkOutDate, setCheckOutDate] = useState(new Date());
-    const [rooms, setRooms] = useState(1);
-    const [adults, setAdults] = useState(2);
-    const [children, setChildren] = useState(0);
+    // const [checkInDate, setCheckInDate] = useState(new Date());
+    // const [checkOutDate, setCheckOutDate] = useState(new Date());
+    // const [rooms, setRooms] = useState(1);
+    // const [adults, setAdults] = useState(2);
+    // const [children, setChildren] = useState(0);
 
     const [form] = Form.useForm();
     const [value, setValue] = useState([]);
@@ -38,25 +38,20 @@ const DestinationForm = ({onSubmit}) => {
         if (validation(values)) {
              triggerNotif();
          } else {;
+            //local storage
+            const destinationData = new Object();
+            destinationData.destination = destination;
+            destinationData.checkInDate = values.date[0].format("YYYY-MM-DD");
+            destinationData.checkOutDate = values.date[1].format("YYYY-MM-DD");
+            destinationData.rooms = values.numberOfRoom;
+            destinationData.adults = values.numberOfAdult;
+            destinationData.children = values.numberOfChild;
             //redux
             store.dispatch(setStartDate(values.date[0].format("YYYY-MM-DD")));
             store.dispatch(setEndDate(values.date[1].format("YYYY-MM-DD")));
             store.dispatch(setNumOfRoom(values.numberOfRoom));
             store.dispatch(setNumOfAdult(values.numberOfAdult));
             store.dispatch(setNumOfChild(values.numberOfChild));
-            //local storage
-            setCheckInDate(values.date[0].format("YYYY-MM-DD"));
-            setCheckOutDate(values.date[1].format("YYYY-MM-DD"));
-            setRooms(values.numberOfRoom);
-            setAdults(values.numberOfAdult);
-            setChildren(values.numberOfChild);
-            const destinationData = new Object();
-            destinationData.destination = destination;
-            destinationData.checkInDate = checkInDate;
-            destinationData.checkOutDate = checkOutDate;
-            destinationData.rooms = rooms;
-            destinationData.adults = adults;
-            destinationData.children = children;
             onSubmit(destinationData);
         }
     };

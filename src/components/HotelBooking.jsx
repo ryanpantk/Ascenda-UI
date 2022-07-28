@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FlagOutlined, EnvironmentOutlined, BankOutlined, FormOutlined } from '@ant-design/icons';
-import { Button, Steps, Card,Col, Row } from 'antd';
+import { Steps, Card } from 'antd';
 import DestinationForm from './DestinationForm.jsx';
 import HotelDisplay from './HotelDisplay.jsx';
 import HotelRoomDetails from './HotelRoomDetails/HotelRoomDetails.jsx';
@@ -42,12 +42,17 @@ const styles = {
 
 function HotelBooking() {
   const [current, setCurrent] = useState(0);
-  const [destinationData, setDestinationData] = useState(null);
+  const [destinationData, setDestinationData] = useState( {
+    destination: "placeholder",
+    checkInDate: "2022-12-30",
+    checkOutDate: "2022-12-30",
+    rooms: "1",
+    adults: "1",
+    children: "1"})
   const [hotelData, setHotelData] = useState(null);
 
   const next = () => {
     setCurrent(current + 1);
-    document.getElementById("scroll").scrollTo({ top: 0, behavior: 'smooth' }) ;
   };
 
   const prev = () => {
@@ -56,8 +61,16 @@ function HotelBooking() {
 
   const handleDestinationSubmit = (data) => {
     setDestinationData(data);
-    setCurrent(1);
   }
+
+  const [page, setPage] = useState(null);
+  useEffect(() => {
+    if (destinationData.destination != "placeholder") {
+      console.log(destinationData)
+      setPage(<HotelDisplay GetHotel={handleHotelSelect} DestinationData={destinationData} />);
+      setCurrent(1)
+    }
+  }, [destinationData]);
 
   const handleStepperClick = (idx) => {
     if(idx < current){
@@ -67,14 +80,15 @@ function HotelBooking() {
 
   const handleHotelSelect = (hotel) =>{
     setHotelData(hotel);
-    next()
-    console.log("should happen")
+    setCurrent(2);
+    document.getElementById("scroll").scrollTo({ top: 0, behavior: 'smooth' }) ;
   }
 
-  const handleRoomSelect = (value) =>{
-    store.dispatch(setRoomType(value));
-    next()
-    console.log("should not happen")
+  const handleRoomSelect = (value1, value2) =>{
+    store.dispatch(setRoomType(value1));
+    //store.dispatch(setRoomPrice(value2))
+    setCurrent(3)
+    document.getElementById("scroll").scrollTo({ top: 0, behavior: 'smooth' }) ;
   }
 
   return (
@@ -86,10 +100,10 @@ function HotelBooking() {
           </Steps>
           <Card class="scroll" className="steps-content" style={{ background: (current===0) ? "url(https://api.vold.dev.fleava.com/pictures/5bfb719fa60b191fb4f81ea1/the_resort/14e7403f-7a95-4b9e-b175-815c3b325c5c.jpg) no-repeat" : "white", backgroundSize:"cover", height:'90%', boxSizing: 'border-box', opacity:1 }} >
             {current === 0 && (
-              <DestinationForm onSubmit={(e) => handleDestinationSubmit(e)} style={{marginTop:50}}></DestinationForm>
+              <DestinationForm onSubmit={handleDestinationSubmit}></DestinationForm>
             )}
             {current === 1 && (
-              <HotelDisplay GetHotel={handleHotelSelect} DestinationData={destinationData} />
+              page
             )}
             {current === 2 && (
               <HotelRoomDetails handleRoomSelect={handleRoomSelect} hotelID={ hotelData.id }/> 
