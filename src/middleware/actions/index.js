@@ -97,3 +97,38 @@ export const setRoomType = (item) => {
         payload: item
     };
 };
+
+export const setRoomPrice = (item) => {
+    return {
+        type: 'SETPR',
+        payload: item
+    };
+};
+
+export const setRoomName = (item) => {
+    return {
+        type: 'SETROOMNAME',
+        payload: item
+    };
+};
+
+export const setHotelID = (item) => {
+    return {
+        type: 'SETHOTEL',
+        payload: item
+    };
+};
+
+export const setHotelName = (item) => {
+    return {
+        type: 'SETHOTELNAME',
+        payload: item
+    };
+};
+
+export const setURL = (item) => {
+    return {
+        type: 'SETURL',
+        payload: item
+    };
+};

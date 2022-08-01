@@ -113,90 +113,85 @@ const DestinationForm = ({onSubmit}) => {
       }
 
     return (
-        <div style={{marginTop: 60}}>
-        <Form layout="vertical" form={form} name="control-hooks" onFinish={onFinish} requiredMark="optional" >
-            <Row>
-                <Col span= {10} offset={7}>
-                    <Card style={{borderRadius:5, paddingTop:10, paddingBottom:10}}>
-                        <Row>
-                            <Col span={24}>
-                                <Form.Item name="destination" required>
-                                    <span style={{display:"block", fontWeight: "bold", marginBottom:6, textAlign: "left"}}>DESTINATION</span>
-                                    <DebounceSelect
-                                        showSearch
-                                        showArrow={false}
-                                        value={value}
-                                        placeholder="City / Country"
-                                        fetchOptions={fetchDestination}
-                                        onChange={(newValue) => {
-                                            setValue(newValue);
-                                            store.dispatch(setDest(newValue.value));
-                                            setDestination(newValue.value);
-                                        }}
-                                        style={{
-                                            width: '100%',
-                                            textAlign: 'left'
-                                        }}
-                                    />
-                                </Form.Item>
-                            </Col>
-                        </Row>
+        <Card style={{borderRadius:5, padding:"10px 5px", width:"40%"}}>
+            <Form layout="vertical" form={form} onFinish={onFinish} requiredMark="optional">
+                <Row>
+                    <Col span={24}>
+                    <span style={{display:"block", fontWeight: "bold", marginBottom:6, textAlign: "left"}}>DESTINATION</span>
+                        <Form.Item name="destination" required>
+                            <DebounceSelect
+                                showSearch
+                                showArrow={false}
+                                value={value}
+                                placeholder="City / Country"
+                                fetchOptions={fetchDestination}
+                                onChange={(newValue) => {
+                                    setValue(newValue);
+                                    store.dispatch(setDest(newValue.value));
+                                    setDestination(newValue.value);
+                                }}
+                                style={{
+                                    width: '100%',
+                                    textAlign: 'left'
+                                }}
+                            />
+                        </Form.Item>
+                    </Col>
+                </Row>
 
-                        <Row>
-                            <Col span={24}>
-                                <span style={{display:"block", fontWeight: "bold", marginBottom:6, textAlign: "left"}}>CHECK-IN / CHECK-OUT DATE</span>
-                                <Form.Item name="date" required>
-                                    <RangePicker disabledDate={disabledDate} style={{width: '100%', fontWeight: "bold"}} />
-                                </Form.Item>
-                            </Col>
-                        </Row>
+                <Row>
+                    <Col span={24}>
+                        <span style={{display:"block", fontWeight: "bold", marginBottom:6, textAlign: "left"}}>CHECK-IN / CHECK-OUT DATE</span>
 
-                        <Row>
-                            <Col span={8} offset={0}>
-                                <span style={{display:"block", fontWeight: "bold", marginBottom:6, textAlign: "left"}}>ROOMS</span>
-                                <Form.Item name="numberOfRoom" required>
-                                    <Select style={{width: '100%'}}>
-                                        <Option value="1">1 Room</Option>
-                                        <Option value="2">2 Room</Option>
-                                        <Option value="3">3 Room</Option>
-                                        <Option value="4">4 Room</Option>
-                                    </Select>
-                                </Form.Item>
-                            </Col>
-                            <Col span={7} offset={1}>
-                                <span style={{display:"block", fontWeight: "bold", marginBottom:6, textAlign: "left"}}>ADULTS</span>
-                                <Form.Item name="numberOfAdult" required>
-                                    <Select style={{width: '100%'}}>
-                                        <Option value="1">1</Option>
-                                        <Option value="2">2</Option>
-                                        <Option value="3">3</Option>
-                                        <Option value="4">4</Option>
-                                    </Select>
-                                </Form.Item>
-                            </Col>
-                            <Col span={7} offset={1}>
-                                <span style={{display:"block", fontWeight: "bold", marginBottom:6, textAlign: "left"}}>CHILDREN</span>
-                                <Form.Item name="numberOfChild" required>
-                                    <Select style={{width: '100%'}}>
-                                        <Option value="0">0</Option>
-                                        <Option value="1">1</Option>
-                                        <Option value="2">2</Option>
-                                        <Option value="3">3</Option>
-                                        <Option value="4">4</Option>
-                                    </Select>
-                                </Form.Item>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col span={24} style={{marginTop: 6}}>
-                                <Button type="primary" shape="default" size="large" htmlType="submit" style={{width: "100%"}}>Search Hotel</Button>
-                            </Col>
-                        </Row>
-                    </Card>
-                </Col>
-            </Row>
-        </Form>
-        </div>
+                        <Form.Item name="date" required>
+                            <RangePicker disabledDate={disabledDate} style={{width: '100%', fontWeight: "bold"}} />
+                        </Form.Item>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col span={8} offset={0}>
+                        <span style={{display:"block", fontWeight: "bold", marginBottom:6, textAlign: "left"}}>ROOMS</span>
+                        <Form.Item name="numberOfRoom" required>
+                            <Select style={{width: '100%'}}>
+                                <Option value="1">1 Room</Option>
+                                <Option value="2">2 Room</Option>
+                                <Option value="3">3 Room</Option>
+                                <Option value="4">4 Room</Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                    <Col span={7} offset={1}>
+                        <span style={{display:"block", fontWeight: "bold", marginBottom:6, textAlign: "left"}}>ADULTS</span>
+                        <Form.Item name="numberOfAdult" required>
+                            <Select style={{width: '100%'}}>
+                                <Option value="1">1</Option>
+                                <Option value="2">2</Option>
+                                <Option value="3">3</Option>
+                                <Option value="4">4</Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                    <Col span={7} offset={1}>
+                        <span style={{display:"block", fontWeight: "bold", marginBottom:6, textAlign: "left"}}>CHILDREN</span>
+                        <Form.Item name="numberOfChild" required>
+                            <Select style={{width: '100%'}}>
+                                <Option value="0">0</Option>
+                                <Option value="1">1</Option>
+                                <Option value="2">2</Option>
+                                <Option value="3">3</Option>
+                                <Option value="4">4</Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={24} style={{marginTop: 2}}>
+                        <Button type="primary" shape="default" size="large" htmlType="submit" style={{width: "100%"}}>Search Hotel</Button>
+                    </Col>
+                </Row>
+                </Form>
+        </Card>
     )
 
 }

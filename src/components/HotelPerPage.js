@@ -1,4 +1,4 @@
-export async function HotelPerPage(props){
+export async function HotelPerPage(props, HotelDetails){
     var hotelListSlice = [];
     const HotelPriceList = props;
     
@@ -6,11 +6,11 @@ export async function HotelPerPage(props){
             return hotelListSlice;};
     for (let i=0;i<HotelPriceList.length;i++){
         let hotel = HotelPriceList[i];
-        let data = await fetch(`https://hotelapi.loyalty.dev/api/hotels/${hotel.id}`)
-        .then(response => response.json());
-        data["price"]=hotel.price;
+        let data = HotelDetails.find(item => item.id === hotel.id);
+        data["price"]=hotel.lowest_price ;
         data["searchRank"]=hotel.searchRank;
+        data["rooms"]=hotel.rooms
         hotelListSlice.push(data);
-            }
+    }
     return hotelListSlice;
 }

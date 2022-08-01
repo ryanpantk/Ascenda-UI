@@ -4,7 +4,7 @@ const axios = require('axios');
 
 export async function stripeCheckout() {
 
-    let StripePayload = { name: 'John Doe', unit_amount: 1000 };
+    let StripePayload = { name: "Hotel", unit_amount: store.getState().roomPrice };
     let resStripe = await axios.post('http://localhost:5000/apis/create-checkout-session', StripePayload)
     let NodePayload = {
         salutation: store.getState().salutation,
@@ -15,15 +15,17 @@ export async function stripeCheckout() {
         email: store.getState().email,
         specialRequests: store.getState().specialRequest,
         destinationID: store.getState().destinationID,
-        hotelID: "req.body.hotelID",
+        hotelID: store.getState().hotelID,
         numberOfRoom: store.getState().NumRoom,
         startDate: store.getState().startDate,
         endDate: store.getState().endDate,
         numberOfAdult: store.getState().NumAdult,
         numberOfChild: store.getState().NumChild,
-        roomType: "req.body.roomType",
-        averagePrice: "req.body.averagePrice",
-        totalPrice: "req.body.totalPrice"
+        roomType: store.getState().roomType,
+        totalPrice: store.getState().roomPrice,
+        hotelName: store.getState().hotelName,
+        roomName: store.getState().roomName,
+        url: store.getState().url
     }
     let data = resStripe.data;
     console.log(data);

@@ -124,4 +124,52 @@ export const RoomTypeReducer = (state = null, action) => {
     }
 }
 
+export const RoomPriceReducer = (state = null, action) => {
+    switch(action.type) {
+        case 'SETPR':
+            return action.payload || null;
+        default:
+            return state;
+    }
+}
+
+export const RoomNameReducer = (state = null, action) => {
+    switch(action.type) {
+        case 'SETROOMNAME':
+            return action.payload || null;
+        default:
+            return state;
+    }
+}
+
+
+export const HotelIDReducer = (state = null, action) => {
+    switch(action.type) {
+        case 'SETHOTEL':
+            return action.payload || null;
+        default:
+            return state;
+    }
+}
+
+export const HotelNameReducer = (state = null, action) => {
+    switch(action.type) {
+        case 'SETHOTELNAME':
+            return action.payload || null;
+        default:
+            return state;
+    }
+}
+
+export const URLReducer = (state = null, action) => {
+    switch(action.type) {
+        case 'SETURL':
+            return action.payload || null;
+        default:
+            return state;
+    }
+}
+
+
+
 

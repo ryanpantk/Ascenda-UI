@@ -1,14 +1,13 @@
 import { Button, Card, Form, Input, Select, Col, Row, notification } from 'antd';
-import ReCAPTCHA from 'react-google-recaptcha';
-import JSONDATA from '../countryCode.json';
-import { stripeCheckout } from '../middleware/BookingAPIs';
-import { store } from '../store';
-import { setSalutation, setFirstName, setLastName, setCountryCode, setPhoneNumber, setEmail, setSpecialRequest } from '../middleware/actions/'
+import JSONDATA from '../../countryCode.json';
+import { stripeCheckout } from '../../middleware/BookingAPIs';
+import { store } from '../../store';
+import { setSalutation, setFirstName, setLastName, setCountryCode, setPhoneNumber, setEmail, setSpecialRequest } from '../../middleware/actions/'
 
-// import { useSelector, useDispatch } from 'react-redux';
 const {TextArea} = Input;
 const { Option } = Select;
-const openNotificationWithIcon = (placement) => {
+
+const fieldCannotBeEmptyNotif = (placement) => {
     notification.error({
       message: `Error`,
       description:
@@ -17,6 +16,25 @@ const openNotificationWithIcon = (placement) => {
     });
 };
 
+const phoneNumberMustBeNumericNotif = (placement) => {
+    notification.error({
+      message: `Error`,
+      description:
+        'Please enter a valid Phone Number',
+      placement,
+    });
+};
+
+const emailFormatNotif = (placement) => {
+    notification.error({
+      message: `Error`,
+      description:
+        'Please enter a valid email.',
+      placement,
+    });
+};
+
+
 const GuestInformationModal = () => {
     const [form] = Form.useForm();
 
@@ -24,10 +42,6 @@ const GuestInformationModal = () => {
         console.log(`selected ${value}`);
     };
 
-    function onCaptcha(value) {
-        console.log('Captcha value:', value);
-      }
-      
     const onSearch = (value) => {
         console.log('search:', value);
     };
@@ -62,7 +76,7 @@ const GuestInformationModal = () => {
 
     async function onFinish (values) {
         if (validation(values)) {
-            triggerNotif();
+            
         } else {
             console.log(values);
             store.dispatch(setSalutation(values.salutation));
@@ -89,10 +103,33 @@ const GuestInformationModal = () => {
      
     };
 
-    const triggerNotif = () => openNotificationWithIcon('bottomRight');
+    const triggerEmptyNotif = () => fieldCannotBeEmptyNotif('bottomRight');
+    const triggerPhoneNotif = () => phoneNumberMustBeNumericNotif('bottomRight');
+    const triggerEmailNotif = () => emailFormatNotif('bottomRight');
+    
+    const validateEmail = (email) => {
+        return String(email)
+          .toLowerCase()
+          .match(
+            /^\S+@\S+\.\S+$/
+          );
+      };
+      
+      const validatePhone = (phone) => {
+        return /^\d+$/.test(phone)
+      }
 
     function validation(values) {
         if (values.salutation == null || values.firstName == null || values.lastName == null|| values.countryCode == null|| values.phoneNumber == null|| values.email == null) {
+            triggerEmptyNotif();
+            return true;
+        } 
+        if (!validatePhone(values.phoneNumber)) {
+            triggerPhoneNotif();
+            return true;
+        }
+        if (!validateEmail(values.email)) {
+            triggerEmailNotif();
             return true;
         }
         return false;
@@ -162,12 +199,6 @@ const GuestInformationModal = () => {
                         </Row>
                         
                     </Card>
-                </Col>
-                <Col span={4} offset={10} style={{marginTop: 12, marginBottom: 12}}>
-                        <ReCAPTCHA
-                            sitekey="6Led8p8gAAAAAArKHbSfNdm5eY_-WUul_86dCUbr"
-                            onChange={onCaptcha}
-                        />
                 </Col>
                 <Col span={4} offset={10} style={{marginTop: 12}}>
                     <Button onClick={onReset} type="default" shape="default" size="large" style={{borderRadius: 15, width:220}}>Reset Fields</Button>

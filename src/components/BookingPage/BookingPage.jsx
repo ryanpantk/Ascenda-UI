@@ -1,5 +1,5 @@
-import BookingSummary from "../BookingSummary";
-import GuestInformationModal from "../GuestInformationModal";
+import BookingSummary from "./BookingSummary";
+import GuestInformationModal from "./GuestInformationModal";
 
 
 const BookingPage = () => {
