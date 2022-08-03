@@ -7,6 +7,7 @@ import HotelRoomDetails from './HotelRoomDetails/HotelRoomDetails.jsx';
 import BookingPage from './BookingPage/BookingPage.jsx';
 import { store } from '../store.js'
 import  { setHotelName, setRoomPrice, setRoomType, setRoomName, setURL } from '../middleware/actions/'
+const sleep = require('util').promisify(setTimeout)
 
 const { Step } = Steps;
 const steps = [
@@ -88,6 +89,9 @@ function HotelBooking() {
     if(idx < current){
       setCurrent(idx);
     }
+    (async () => {
+        await sleep(500)
+    })()
   }
 
   const handleHotelSelect = (hotel) =>{

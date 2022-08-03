@@ -71,18 +71,17 @@ class HotelDisplay extends React.Component{
                   />
                   <p>Loading......</p></div>)}   
             
-            
-            if(!this.state.flag1){
-                return <p>Sorry there are no hotels available</p>
-            }
         };
         
-        if(!this.state.hotelListSlice.length>0){
+        if(this.state.hotellist && !this.state.hotelListSlice.length>0){
             this.sethotelListSlice(this.state.currentPage);
             }
-        if(this.state.hotellist.length>=10 && this.state.currentPage === 1 && this.state.hotelListSlice.length<10){
+        if(this.state.hotellist && this.state.hotellist.length>=10 && this.state.currentPage === 1 && this.state.hotelListSlice.length<10){
             this.sethotelListSlice(this.state.currentPage);
             }
+        if(this.state.hotellist && this.state.hotellist.length === 0 && !this.state.flag1){
+            return <p>Sorry there are no hotels available</p>
+        }
 
         return(
             <React.Fragment>

@@ -69,13 +69,17 @@ const GetRoomDetails = async (hotelID) => {
         });
         res1 = await res.json();
         (async () => {
-            await sleep(400)
+            await sleep(1000)
         })()
     }
     var seen = {};
-    res1.rooms = res1.rooms.filter(function(item) {
-        return seen.hasOwnProperty(item.roomNormalizedDescription) ? false : (seen[item.roomNormalizedDescription] = true);
-    })
+    if (res1.rooms) {
+        res1.rooms = res1.rooms.filter(function(item) {
+            return seen.hasOwnProperty(item.roomNormalizedDescription) ? false : (seen[item.roomNormalizedDescription] = true);
+        })
+    } else {
+        res1.rooms = []
+    }
     return res1;
 };
 
@@ -166,7 +170,7 @@ const HotelRoomDetails = (props) => {
                             <h4 style={{ display:"block", fontWeight: "bold",fontSize: "large", marginBottom:10 }}>{hotel.address}</h4>
                             <Row type="flex" align="middle">
                                 <span style={{ fontSize: "large", marginRight: 6 }}>Hotel Rating: </span>
-                                {Array(Math.round(hotel.rating)).fill(null).map((value, index) => (
+                                {hotel.rating && Array(Math.round(hotel.rating)).fill(null).map((value, index) => (
                                     <StarFilled style={{ margin: 0, padding: 0, verticalAlign: 'middle', color:'orange' }}  key={index}/>))}
                             </Row>
                         </div>
