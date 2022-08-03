@@ -45,6 +45,7 @@ class HotelDisplay extends React.Component{
     handlePageChange = page =>{
         this.setState({currentPage:page})
         this.sethotelListSlice(page);
+        this.props.PageChange()
     };
     setFlag = ()=>{this.setState({flag1:false})};
 

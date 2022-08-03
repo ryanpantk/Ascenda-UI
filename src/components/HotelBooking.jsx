@@ -79,7 +79,7 @@ function HotelBooking() {
 
   useEffect(() => {
     if (details != null) {
-      setPage(<HotelDisplay GetHotel={handleHotelSelect} DestinationData={destinationData} HotelDetails={details}/>);
+      setPage(<HotelDisplay GetHotel={handleHotelSelect} DestinationData={destinationData} HotelDetails={details} PageChange={handlePageChange}/>);
       setCurrent(1)
     }
   }, [destinationData, details]);
@@ -105,6 +105,11 @@ function HotelBooking() {
     document.getElementsByClassName("scroll")[0].scrollTo({ top: 0, behavior: 'smooth' }) ;
     setCurrent(3)
   }
+
+  const handlePageChange = () =>{
+    document.getElementsByClassName("scroll")[0].scrollTo({ top: 0, behavior: 'smooth' }) ;
+  }
+  
   
   return (
       <Card style={{borderRadius: 10, height:'90%', width:'80%', boxSizing: 'border-box', padding:"0px 20px" }} bodyStyle={styles.cardBody}>
