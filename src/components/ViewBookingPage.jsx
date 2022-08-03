@@ -21,6 +21,15 @@ const openNotificationWithIcon = (placement) => {
     });
 };
 
+const wrongLoginNotification = (placement) => {
+    notification.error({
+      message: `Your Login Credentials are Incorrect`,
+      description:
+        'Your booking ID and password can be found from your confirmed booking in your email.',
+      placement,
+    });
+};
+
 const openNotification = (placement) => {
     notification.error({
       message: `Deleted`,
@@ -31,6 +40,7 @@ const openNotification = (placement) => {
 };
 
 const triggerNotif = () => openNotificationWithIcon('bottomRight');
+const triggerLoginNotif = () => wrongLoginNotification('bottomRight');
 const triggerDeleteNotif = () => openNotification('bottomRight');
 
 function validation(values) {
@@ -73,24 +83,27 @@ export default function DeleteBookingPage(){
          } else {;
             //redux
             booking = values.bookingID;
-            const result = await axios.post("http://localhost:5000/apis/check-booking-credentials", {bookingID: values.bookingID, password: values.password});
-            if (result.data.check === true) {
+            let result;
+            try {
+                result = await axios.post("http://localhost:5000/apis/check-booking-credentials", {bookingID: values.bookingID, password: values.password});
+            } catch (error) {
+                triggerLoginNotif()
+            }
+                if (result && result.data && result.data.check === true) {
                 console.log("true")
                 booking = values.bookingID;
                 setCheck(true)
                 const res = await axios.get("http://localhost:5000/apis/viewOneBooking/"+booking);
                 setOutput(res.data)
                 console.log(res.data)
-            }
+            } 
         }
     };
 
     async function deletePII() {
+        triggerDeleteNotif();
         const result = await axios.patch(`http://localhost:5000/apis//updateOneBooking/${output.bookingID}`, {});
-        const res = await axios.get("http://localhost:5000/apis/viewOneBooking/"+booking);
-        setOutput(res.data)
-        triggerDeleteNotif()
-        window.location = "http://localhost:3000/delete-booking"
+        window.location = "http://localhost:3000/delete-booking" 
     }
 
     return (

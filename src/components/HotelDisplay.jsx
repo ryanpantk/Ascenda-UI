@@ -16,7 +16,7 @@ class HotelDisplay extends React.Component{
     componentDidMount(){
         const destinationData = GetDestinationData(this.props.DestinationData);
         const sethotellist= async()=>{
-            await GetHotelList(destinationData).then(data=>this.setState({hotellist:data}))
+            await GetHotelList(destinationData).then(data=>this.setState({hotellist:data}|| []))
         };
         sethotellist();
         
@@ -45,12 +45,13 @@ class HotelDisplay extends React.Component{
         this.sethotelListSlice(page);
     };
     render(){
-        if (this.state.hotellist.length === 0){
+        if (this.state.hotellist && this.state.hotellist.length === 0){
             if(this.state.flag){
-            const setFlag = ()=>{this.setState({flag:false})};
-            setTimeout(setFlag,20000);}
+                const setFlag = ()=>{this.setState({flag:false})};
+                setTimeout(setFlag,5000);
+            }
             if(this.state.flag){
-                this.componentDidMount()
+                setTimeout(this.componentDidMount(),2000)
                 return <div>
                     <Spin indicator= { <LoadingOutlined
                         style={{
@@ -74,7 +75,9 @@ class HotelDisplay extends React.Component{
         return(
         <React.Fragment>
             <Col >
+            {this.state.hotellist != null &&
             <p><b>Total Hotels Found: {this.state.hotellist.length} </b></p>
+            }
             <table className='table'>
                 <thead>
                     <tr>
@@ -98,12 +101,14 @@ class HotelDisplay extends React.Component{
                     
                 </tbody>
             </table>
+            {this.state.hotellist != null &&
             <Pagination 
                 itemsCount={this.state.hotellist.length} 
                 pageSize={this.state.pageSize} 
                 currentPage = {this.state.currentPage}
                 onPageChange={this.handlePageChange}
                 />
+            }
                 </Col>
         </React.Fragment>
         
