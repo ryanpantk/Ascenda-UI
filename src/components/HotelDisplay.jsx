@@ -16,7 +16,7 @@ class HotelDisplay extends React.Component{
     componentDidMount(){
         const destinationData = GetDestinationData(this.props.DestinationData);
         const sethotellist= async()=>{
-            await GetHotelList(destinationData).then(data=>this.setState({hotellist:data}|| []))
+            await GetHotelList(destinationData).then(data=>this.setState({hotellist:data}))
         };
         sethotellist();
         
@@ -90,11 +90,17 @@ class HotelDisplay extends React.Component{
                 <tbody>
                     {this.state.hotelListSlice.map(hotel =>
                     <tr key={hotel.id}>
+                        {hotel.image_details &&
                         <td width="200" height="200"><Image src={`${hotel.image_details.prefix}${hotel.default_image_index}${hotel.image_details.suffix}`} style={{objectFit:"cover", width:260, height:200}} 
                             fallback={`https://d2ey9sqrvkqdfs.cloudfront.net/diH7/${Math.floor(Math.random()*50)}.jpg`}
                         /></td>
+                        }
+                         {hotel.name &&
                         <td>{<h5> {hotel.name} </h5>}</td>
+                         }
+                         {hotel.price &&
                         <td>{<h5> ${hotel.price} </h5>}</td>
+                         }
                         <td><button onClick={()=>this.handleSelect(hotel)} type="button" className="btn btn-primary" id="selbtn">Select</button></td>
                     </tr>
                     )}
