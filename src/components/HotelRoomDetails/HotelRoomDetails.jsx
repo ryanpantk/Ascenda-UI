@@ -30,13 +30,7 @@ const contentStyleRoom = {
 };
 
 const GetHotelDetails = async (hotelID) => {
-    let payload = {}
-    payload.url = `https://hotelapi.loyalty.dev/api/hotels/${hotelID}`
-    const res = await fetch("http://localhost:5000/apis/hotelDetail", {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'}, // this line is important, if this content-type is not set it wont work
-        body: JSON.stringify(payload)
-    });
+    let res = await fetch(`http://localhost:5000/apis/hotelDetail/${hotelID}`);
     const hotelDetails = await res.json();
     return hotelDetails;
 };
@@ -57,7 +51,7 @@ const GetRoomDetails = async (hotelID) => {
     });
     let res1 = await res.json();
     let i = 0;
-    while (res1.rooms == null) {
+    while (res1.rooms == null || res1.rooms ===[]) {
         if (i ===5) {
             break
         }
@@ -174,10 +168,13 @@ const HotelRoomDetails = (props) => {
                 </Col>
             </Row>
             <Row style={{marginTop: 24}}>
-                <Card title= {<h3> <b>  Hotel Overview </b></h3>} style={{height:"100%"}}>
-                    <div style={{height:'100%', boxSizing: 'border-box', textAlign: 'left'}}>
+                <Card title= {<h3> <b>  Hotel Overview </b></h3>} style={{height:"100%", width:"100%"}}>
+                    <div style={{height:'100%',width:"100%", boxSizing: 'border-box', textAlign: 'left'}}>
                         <Row>
-                            {parse(sanitizeHtml(hotel.description))}
+                            {hotel.description && parse(sanitizeHtml(hotel.description))}
+                            {!hotel.description &&
+                            <p style={{ fontSize:"large" }}>Description currently unavailable.</p>
+                            }     
                         </Row>
                     </div>
                 </Card>
@@ -201,9 +198,9 @@ const HotelRoomDetails = (props) => {
                             fallback="https://d2ey9sqrvkqdfs.cloudfront.net/diH7/2.jpg"                            
                             /> 
                         } 
-                        {value.images === [] ||
+                        {((value.images === []) ||
                         (value.images !== [] &&
-                        value.images[0] == null) &&
+                        value.images[0] == null)) &&
                             <Image style={contentStyleRoom} 
                             src="https://d2ey9sqrvkqdfs.cloudfront.net/diH7/2.jpg" 
                             fallback="https://d2ey9sqrvkqdfs.cloudfront.net/diH7/2.jpg"                            

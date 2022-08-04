@@ -12,17 +12,11 @@ export async function HotelPerPage(props, HotelDetails){
     for (let i=0;i<HotelPriceList.length;i++){
         let hotel = HotelPriceList[i];
         let data = HotelDetails.find(item => item.id === hotel.id);
-        if (data == null) {
-            let payload = {}
-            payload.url = `https://hotelapi.loyalty.dev/api/hotels/${hotel.id}`        
-            let res = await fetch("http://localhost:5000/apis/hotelDetail", {
-                method: 'POST',
-                headers: {'Content-Type':'application/json'}, // this line is important, if this content-type is not set it wont work
-                body: JSON.stringify(payload)
-            });
+        if (data == null) {     
+            let res = await fetch(`http://localhost:5000/apis/hotelDetail/${hotel.id}`);
             data = await res.json();
             (async () => {
-                await sleep(400)
+                await sleep(4000)
             })()
         }
         data["price"]=hotel.lowest_price ;

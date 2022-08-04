@@ -66,6 +66,7 @@ const DestinationForm = ({onSubmit}) => {
     }
 
     async function fetchDestination(search) {
+        search = search.replace(" ", "%20")
         return fetch('http://localhost:5000/apis/destination/' + search)
           .then((response) => response.json())
           .then((body) =>

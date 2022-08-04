@@ -52,10 +52,10 @@ class HotelDisplay extends React.Component{
     render(){
         if (this.state.hotellist && this.state.hotellist.length === 0){
             if(this.state.flag2){
-                setTimeout(()=>this.setFlag(),5000);
+                setTimeout(()=>this.setFlag(),8000);
                 setTimeout(()=>this.sethotellist(),2000)
-                setTimeout(()=>this.sethotellist(),4000)
                 setTimeout(()=>this.sethotellist(),5000)
+                setTimeout(()=>this.sethotellist(),8000)
                 this.setState({flag2:false});
             }
             if(this.state.flag1){
@@ -101,9 +101,11 @@ class HotelDisplay extends React.Component{
                     <tbody>
                         {this.state.hotelListSlice.map(hotel =>
                         <tr key={hotel.id}>
+                            {hotel.default_image_index &&
                             <td width="200" height="200"><Image src={`${hotel.image_details.prefix}${hotel.default_image_index}${hotel.image_details.suffix}`} style={{objectFit:"cover", width:260, height:200}} 
-                                fallback={`https://d2ey9sqrvkqdfs.cloudfront.net/diH7/${Math.floor(Math.random()*50)}.jpg`}
+                                fallback={`https://d2ey9sqrvkqdfs.cloudfront.net/diH7/4.jpg`}
                             /></td>
+                            }
                             <td>{<h5> {hotel.name} </h5>}</td>
                             <td>{<h5> ${hotel.price} </h5>}</td>
                             <td><button onClick={()=>this.handleSelect(hotel)} type="button" className="btn btn-primary" id="selbtn">Select</button></td>

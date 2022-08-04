@@ -59,12 +59,9 @@ function HotelBooking() {
   }
 
   const getDetails = useCallback(async (payload) => {
-    let data = await fetch("http://localhost:5000/apis/hotelsDetail", {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'}, 
-      body: JSON.stringify(payload)
-    });
+    let data = await fetch(`http://localhost:5000/apis/hotelsDetail/${payload}`);
     let response = await data.json()
+    console.log(response)
     setDetails(response)
   }, [])
 
@@ -72,9 +69,7 @@ function HotelBooking() {
   var [details, setDetails] = useState();
   useEffect(() => {
     if (destinationData.destination !== "placeholder") {
-      let payload = {}
-      payload.url = `https://hotelapi.loyalty.dev/api/hotels?destination_id=${destinationData.destination}`
-      getDetails(payload)
+      getDetails(destinationData.destination)
     }
   }, [destinationData, getDetails]);
 
@@ -116,7 +111,7 @@ function HotelBooking() {
   
   
   return (
-      <Card style={{borderRadius: 10, height:'90%', width:'80%', boxSizing: 'border-box', padding:"0px 20px" }} bodyStyle={styles.cardBody}>
+      <Card style={{borderRadius: 10, height:'90%', width:'80%', boxSizing: 'border-box' }} bodyStyle={styles.cardBody}>
         <Steps className="steps-bar modified-steps" current={current} size="small">
           {steps.map((item, idx) => (
             <Step key={item.key} title={item.title} icon={item.icon} onClick={(e) => handleStepperClick(idx)}/>
