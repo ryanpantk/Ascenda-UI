@@ -1,3 +1,5 @@
+//In-line CSS Styling
+
 const ulStyle = {
     padding: '0',
     margin: '0',

@@ -1,5 +1,6 @@
 import { Button } from 'antd';
 
+//In-line CSS Styling
 const myStyle={
     backgroundImage:"url('https://images.pexels.com/photos/615060/pexels-photo-615060.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
     height:'100%',

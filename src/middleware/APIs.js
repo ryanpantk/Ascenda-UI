@@ -31,5 +31,24 @@ export async function stripeCheckout() {
     let {url, payment_intent} = data;
     NodePayload.stripeID = payment_intent;
     await axios.post('http://localhost:5000/apis/postBooking', NodePayload);
-    window.location = url
+    window.location = url;
+}
+
+export async function hotelListDetails(payload) {
+    const hotelListDetails = await fetch(`http://localhost:5000/apis/hotelsDetail/${payload}`);
+    return hotelListDetails
+}
+
+export async function viewBooking(payload) {
+    const booking = axios.get("http://localhost:5000/apis/viewOneBooking/" + payload);
+    return booking;
+}
+
+export async function deleteInformation(payload) {
+    await axios.patch(`http://localhost:5000/apis//updateOneBooking/${payload}`, {});
+}
+
+export async function checkBookingCredentials(payload) {
+    const checkBooking = axios.post("http://localhost:5000/apis/check-booking-credentials", payload);
+    return checkBooking;
 }

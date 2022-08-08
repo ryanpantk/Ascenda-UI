@@ -24,11 +24,6 @@ const disabledDate = (current) => {
 
 const DestinationForm = ({onSubmit}) => {
     const [destination, setDestination] = useState('Destination or Hotel');
-    // const [checkInDate, setCheckInDate] = useState(new Date());
-    // const [checkOutDate, setCheckOutDate] = useState(new Date());
-    // const [rooms, setRooms] = useState(1);
-    // const [adults, setAdults] = useState(2);
-    // const [children, setChildren] = useState(0);
 
     const [form] = Form.useForm();
     const [value, setValue] = useState([]);

@@ -1,15 +1,16 @@
 import { useState, useEffect, useCallback} from 'react';
-import { FlagOutlined, EnvironmentOutlined, BankOutlined, FormOutlined } from '@ant-design/icons';
 import { Steps, Card } from 'antd';
 import DestinationForm from './DestinationPage/DestinationForm.jsx';
 import HotelDisplay from './HotelDisplay/HotelDisplay.jsx';
 import HotelRoomDetails from './HotelRoomsPage/HotelRoomDetails.jsx';
 import BookingPage from './BookingPage/BookingPage.jsx';
 import { store } from '../store.js'
+import { FlagOutlined, EnvironmentOutlined, BankOutlined, FormOutlined } from '@ant-design/icons';
 import  { setHotelName, setRoomPrice, setRoomType, setRoomName, setURL } from '../middleware/ReduxActions'
+import { hotelListDetails } from '../middleware/APIs.js';
 const sleep = require('util').promisify(setTimeout)
-
 const { Step } = Steps;
+
 const steps = [
   {
     key:0,
@@ -54,20 +55,28 @@ function HotelBooking() {
     children: "1",
     guestNumber: "1"})
   const [hotelData, setHotelData] = useState(null);
+  const [page, setPage] = useState(null);
+  var [details, setDetails] = useState();
+
+  const handleStepperClick = (idx) => {
+    if(idx < current){
+      setCurrent(idx);
+    }
+    (async () => {
+        await sleep(500)
+    })()
+  }
 
   const handleDestinationSubmit = (data) => {
     setDestinationData(data);
   }
 
   const getDetails = useCallback(async (payload) => {
-    let data = await fetch(`http://localhost:5000/apis/hotelsDetail/${payload}`);
+    let data = await hotelListDetails(payload);
     let response = await data.json()
-    console.log(response)
     setDetails(response)
   }, [])
-
-  const [page, setPage] = useState(null);
-  var [details, setDetails] = useState();
+  
   useEffect(() => {
     if (destinationData.destination !== "placeholder") {
       getDetails(destinationData.destination)
@@ -81,15 +90,6 @@ function HotelBooking() {
     }
   }, [destinationData, details]);
 
-  const handleStepperClick = (idx) => {
-    if(idx < current){
-      setCurrent(idx);
-    }
-    (async () => {
-        await sleep(500)
-    })()
-  }
-
   const handleHotelSelect = (hotel) =>{
     store.dispatch(setHotelName(hotel.name));
     setHotelData(hotel);
@@ -97,11 +97,11 @@ function HotelBooking() {
     document.getElementsByClassName("scroll")[0].scrollTo({ top: 0, behavior: 'smooth' }) ;
   }
 
-  const handleRoomSelect = (value1, value2, value3, value4) =>{
-    store.dispatch(setRoomType(value1));
-    store.dispatch(setRoomPrice(value2));
-    store.dispatch(setRoomName(value3));
-    store.dispatch(setURL(value4));
+  const handleRoomSelect = (RoomType, RoomPrice, RoomName, HotelURL) =>{
+    store.dispatch(setRoomType(RoomType));
+    store.dispatch(setRoomPrice(RoomPrice));
+    store.dispatch(setRoomName(RoomName));
+    store.dispatch(setURL(HotelURL));
     document.getElementsByClassName("scroll")[0].scrollTo({ top: 0, behavior: 'smooth' }) ;
     setCurrent(3)
   }

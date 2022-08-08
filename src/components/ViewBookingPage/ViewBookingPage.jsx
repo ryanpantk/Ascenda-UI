@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { Button, Card, Form, Input, Col, notification, Image, Row } from 'antd';
+import { Button, Card, Form, Input, Col, Image, Row } from 'antd';
+import { ViewBooking_ViewBooking_DeletedNotificationWithIcon, ViewBooking_WrongLoginNotification, ViewBooking_DeletedNotification} from '../../middleware/Notifications'
+import { checkBookingCredentials, viewBooking, deleteInformation } from '../../middleware/APIs';
 const axios = require('axios');
 
 let booking = ""
@@ -9,39 +11,11 @@ const myStyle={
     fontSize:'50px',
     display: 'flex',
     alignItems: 'center'
-
 };
 
-const openNotificationWithIcon = (placement) => {
-    notification.error({
-      message: `Incomplete`,
-      description:
-        'Please fill in all required information.',
-      placement,
-    });
-};
-
-const wrongLoginNotification = (placement) => {
-    notification.error({
-      message: `Your Login Credentials are Incorrect`,
-      description:
-        'Your booking ID and password can be found from your confirmed booking in your email.',
-      placement,
-    });
-};
-
-const openNotification = (placement) => {
-    notification.error({
-      message: `Deleted`,
-      description:
-        "Your Personal Information have been removed from Ascenda's database",
-      placement,
-    });
-};
-
-const triggerNotif = () => openNotificationWithIcon('bottomRight');
-const triggerLoginNotif = () => wrongLoginNotification('bottomRight');
-const triggerDeleteNotif = () => openNotification('bottomRight');
+const triggerNotif = () => ViewBooking_ViewBooking_DeletedNotificationWithIcon('bottomRight');
+const triggerLoginNotif = () => ViewBooking_WrongLoginNotification('bottomRight');
+const triggerDeleteNotif = () => ViewBooking_DeletedNotification('bottomRight');
 
 function validation(values) {
     if (values.password == null || values.bookingID == null) {
@@ -50,11 +24,9 @@ function validation(values) {
     return false;
 }
 
-
 export default function DeleteBookingPage(){
 
     let [check, setCheck] = useState(false);
-
     let [output, setOutput] = useState({
         "salutation": "NIL",
         "firstName": "NIL",
@@ -85,23 +57,23 @@ export default function DeleteBookingPage(){
             booking = values.bookingID;
             let result;
             try {
-                result = await axios.post("http://localhost:5000/apis/check-booking-credentials", {bookingID: values.bookingID, password: values.password});
+                result = await checkBookingCredentials({bookingID: values.bookingID, password: values.password});
             } catch (error) {
-                triggerLoginNotif()
+                triggerLoginNotif();
             }
                 if (result && result.data && result.data.check === true) {
                 booking = values.bookingID;
-                setCheck(true)
-                const res = await axios.get("http://localhost:5000/apis/viewOneBooking/"+booking);
-                setOutput(res.data)
+                setCheck(true);
+                const res = await viewBooking(booking);
+                setOutput(res.data);
             } 
         }
     };
 
     async function deletePII() {
         triggerDeleteNotif();
-        const result = await axios.patch(`http://localhost:5000/apis//updateOneBooking/${output.bookingID}`, {});
-        window.location = "http://localhost:3000/delete-booking" 
+        await deleteInformation(output.bookingID);
+        window.location = "http://localhost:3000/delete-booking";
     }
 
     return (

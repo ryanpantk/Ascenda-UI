@@ -12,15 +12,15 @@ import { store } from '../../store';
 
 class HotelDisplay extends React.Component{
     
-    
     componentDidMount(){
         this.sethotellist();
-        
     }
+
     sethotellist= async()=>{
         const destinationData = GetDestinationData(this.props.DestinationData);
         await GetHotelList(destinationData).then(data=>this.setState({hotellist:data}|| []))
-        };
+    };
+
     state={
         hotellist: [],
         pageSize: 10,
@@ -30,7 +30,6 @@ class HotelDisplay extends React.Component{
         flag2:true
     };
 
-
     handleSelect = (hotel) =>{
         store.dispatch(setHotelID(hotel.id));
         this.props.GetHotel(hotel);
@@ -38,12 +37,14 @@ class HotelDisplay extends React.Component{
 
     sethotelListSlice=async(page)=>{
             await HotelPerPage(paginate(this.state.hotellist, page, this.state.pageSize), this.props.HotelDetails).then(data=>this.setState({hotelListSlice:data}))
-         };
+    };
+
     handlePageChange = page =>{
         this.setState({currentPage:page})
         this.sethotelListSlice(page);
         this.props.PageChange()
     };
+
     setFlag = ()=>{this.setState({flag1:false})};
 
     render(){
@@ -120,7 +121,7 @@ class HotelDisplay extends React.Component{
                     </Col>
             </React.Fragment>
         
-                    )}
+        )}
 }
 
 

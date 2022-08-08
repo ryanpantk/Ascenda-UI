@@ -22,7 +22,7 @@ export async function HotelPerPage(props, HotelDetails){
         if (data != null) {    
             data["price"]=hotel.lowest_price ;
             data["searchRank"]=hotel.searchRank;
-            data["rooms"]=hotel.rooms
+            data["rooms"]=hotel.rooms;
             hotelListSlice.push(data);
         }
     }
