@@ -1,8 +1,8 @@
 import { Button, Card, Form, Input, Select, Col, Row, notification } from 'antd';
 import JSONDATA from '../../countryCode.json';
-import { stripeCheckout } from '../../middleware/BookingAPIs';
+import { stripeCheckout } from '../../middleware/APIs';
 import { store } from '../../store';
-import { setSalutation, setFirstName, setLastName, setCountryCode, setPhoneNumber, setEmail, setSpecialRequest } from '../../middleware/actions/'
+import { setSalutation, setFirstName, setLastName, setCountryCode, setPhoneNumber, setEmail, setSpecialRequest } from '../../middleware/ReduxActions'
 
 const {TextArea} = Input;
 const { Option } = Select;
@@ -38,14 +38,6 @@ const emailFormatNotif = (placement) => {
 const GuestInformationModal = () => {
     const [form] = Form.useForm();
 
-    const onChange = (value) => {
-        console.log(`selected ${value}`);
-    };
-
-    const onSearch = (value) => {
-        console.log('search:', value);
-    };
-
     const onSalutationChange = (value) => {
         switch (value) {
           case 'Mr.':
@@ -78,7 +70,6 @@ const GuestInformationModal = () => {
         if (validation(values)) {
             
         } else {
-            console.log(values);
             store.dispatch(setSalutation(values.salutation));
             store.dispatch(setFirstName(values.firstName));
             store.dispatch(setLastName(values.lastName));
@@ -169,8 +160,6 @@ const GuestInformationModal = () => {
                                         onFocus={onFocus}
                                         showSearch
                                         optionFilterProp="children"
-                                        onChange={onChange}
-                                        onSearch={onSearch}
                                         filterOption={(input, option) => option.children.join('').toLowerCase().includes(input.toLowerCase())}
                                     >
                                         {JSONDATA["countries"].map((item,i) => <Option key={i} value={item.name}> {item.name}: {item.code} </Option>)} 

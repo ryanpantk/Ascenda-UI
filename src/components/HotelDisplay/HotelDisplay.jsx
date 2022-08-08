@@ -7,19 +7,17 @@ import GetDestinationData from './GetDestinationData.js';
 import { Image, Col, Spin } from 'antd';
 import { HotelPerPage } from './HotelPerPage.js';
 import { LoadingOutlined } from '@ant-design/icons';
-import { setHotelID } from '../middleware/actions/index.js';
-import { store } from '../store';
+import { setHotelID } from '../../middleware/ReduxActions/index.js';
+import { store } from '../../store';
 
 class HotelDisplay extends React.Component{
     
     
     componentDidMount(){
-        console.log('called1');
         this.sethotellist();
         
     }
     sethotellist= async()=>{
-        console.log('called2');
         const destinationData = GetDestinationData(this.props.DestinationData);
         await GetHotelList(destinationData).then(data=>this.setState({hotellist:data}|| []))
         };
@@ -34,7 +32,6 @@ class HotelDisplay extends React.Component{
 
 
     handleSelect = (hotel) =>{
-        console.log(hotel);
         store.dispatch(setHotelID(hotel.id));
         this.props.GetHotel(hotel);
     };
@@ -54,8 +51,6 @@ class HotelDisplay extends React.Component{
             if(this.state.flag2){
                 setTimeout(()=>this.setFlag(),8000);
                 setTimeout(()=>this.sethotellist(),2000)
-                setTimeout(()=>this.sethotellist(),5000)
-                setTimeout(()=>this.sethotellist(),8000)
                 this.setState({flag2:false});
             }
             if(this.state.flag1){

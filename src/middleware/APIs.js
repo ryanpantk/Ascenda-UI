@@ -28,7 +28,6 @@ export async function stripeCheckout() {
         url: store.getState().url
     }
     let data = resStripe.data;
-    console.log(data);
     let {url, payment_intent} = data;
     NodePayload.stripeID = payment_intent;
     await axios.post('http://localhost:5000/apis/postBooking', NodePayload);

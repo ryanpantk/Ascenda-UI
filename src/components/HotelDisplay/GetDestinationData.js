@@ -7,9 +7,8 @@ const GetDestinationData = props =>{
     const destinationID = destinationData.destination;
     const checkinDate = moment(destinationData.checkInDate).format('yyyy-MM-DD');
     const checkoutDate = moment(destinationData.checkOutDate).format('yyyy-MM-DD');
-    const guestNumber = destinationData.adults+destinationData.children;
+    const guestNumber = destinationData.guestNumber;
     const partnerID = '1' ;
-
 
     return({destinationID,checkinDate,checkoutDate,guestNumber,partnerID})
 }

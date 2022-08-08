@@ -10,19 +10,21 @@ export async function HotelPerPage(props, HotelDetails){
     if (HotelPriceList.length === 0){
             return hotelListSlice;};
     for (let i=0;i<HotelPriceList.length;i++){
+        (async () => {
+            await sleep(2000)
+        })()
         let hotel = HotelPriceList[i];
         let data = HotelDetails.find(item => item.id === hotel.id);
         if (data == null) {     
             let res = await fetch(`http://localhost:5000/apis/hotelDetail/${hotel.id}`);
             data = await res.json();
-            (async () => {
-                await sleep(4000)
-            })()
         }
-        data["price"]=hotel.lowest_price ;
-        data["searchRank"]=hotel.searchRank;
-        data["rooms"]=hotel.rooms
-        hotelListSlice.push(data);
+        if (data != null) {    
+            data["price"]=hotel.lowest_price ;
+            data["searchRank"]=hotel.searchRank;
+            data["rooms"]=hotel.rooms
+            hotelListSlice.push(data);
+        }
     }
     return hotelListSlice;
 }

@@ -1,12 +1,12 @@
 import { useState, useEffect, useCallback} from 'react';
 import { FlagOutlined, EnvironmentOutlined, BankOutlined, FormOutlined } from '@ant-design/icons';
 import { Steps, Card } from 'antd';
-import DestinationForm from './DestinationForm.jsx';
-import HotelDisplay from './HotelDisplay.jsx';
-import HotelRoomDetails from './HotelRoomDetails/HotelRoomDetails.jsx';
+import DestinationForm from './DestinationPage/DestinationForm.jsx';
+import HotelDisplay from './HotelDisplay/HotelDisplay.jsx';
+import HotelRoomDetails from './HotelRoomsPage/HotelRoomDetails.jsx';
 import BookingPage from './BookingPage/BookingPage.jsx';
 import { store } from '../store.js'
-import  { setHotelName, setRoomPrice, setRoomType, setRoomName, setURL } from '../middleware/actions/'
+import  { setHotelName, setRoomPrice, setRoomType, setRoomName, setURL } from '../middleware/ReduxActions'
 const sleep = require('util').promisify(setTimeout)
 
 const { Step } = Steps;
@@ -51,7 +51,8 @@ function HotelBooking() {
     checkOutDate: "2022-12-30",
     rooms: "1",
     adults: "1",
-    children: "1"})
+    children: "1",
+    guestNumber: "1"})
   const [hotelData, setHotelData] = useState(null);
 
   const handleDestinationSubmit = (data) => {

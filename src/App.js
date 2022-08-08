@@ -1,8 +1,8 @@
 import './App.css';
 import HotelBooking from './components/HotelBooking.jsx';
-import ViewBookingPage from './components/ViewBookingPage.jsx';
+import ViewBookingPage from './components/ViewBookingPage/ViewBookingPage.jsx';
 import LandingPage from './components/LandingPage.jsx';
-import Navbar from './components/Navbar.jsx';
+import Navbar from './components/Navigationbar.jsx';
 import { Layout } from 'antd';
 const {Content } = Layout;
 

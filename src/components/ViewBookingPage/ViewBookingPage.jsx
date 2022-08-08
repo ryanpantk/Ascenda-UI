@@ -90,12 +90,10 @@ export default function DeleteBookingPage(){
                 triggerLoginNotif()
             }
                 if (result && result.data && result.data.check === true) {
-                console.log("true")
                 booking = values.bookingID;
                 setCheck(true)
                 const res = await axios.get("http://localhost:5000/apis/viewOneBooking/"+booking);
                 setOutput(res.data)
-                console.log(res.data)
             } 
         }
     };

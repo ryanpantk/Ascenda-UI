@@ -9,12 +9,8 @@ const checkoutDate = '2022-09-05';
 
 test('GetHotelDetails test',async()=>{
     let payload = {}
-    payload.url = `https://hotelapi.loyalty.dev/api/hotels/${hotelID}`
-    const res = await fetch("http://localhost:5000/apis/hotelDetail", {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'}, // this line is important, if this content-type is not set it wont work
-        body: JSON.stringify(payload)
-    });
+    payload.url = `https://hotelapi.loyalty.dev/api/hotels/`
+    const res = await fetch(`http://localhost:5000/apis/hotelDetail/${hotelID}`);
 
     expect(res.status).toEqual(200);
 })

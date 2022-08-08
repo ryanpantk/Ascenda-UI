@@ -1,9 +1,9 @@
 import { DatePicker, Button, Card, Form, Select, Col, Row, notification, Spin } from 'antd';
 import { useMemo, useRef, useState } from 'react';
 import moment from 'moment';
-import { store } from '../store';
+import { store } from '../../store';
 import debounce from 'lodash/debounce';
-import  { setDest, setStartDate, setEndDate, setNumOfRoom, setNumOfAdult, setNumOfChild } from '../middleware/actions/'
+import  { setDest, setStartDate, setEndDate, setNumOfRoom, setNumOfAdult, setNumOfChild } from '../../middleware/ReduxActions'
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -45,6 +45,16 @@ const DestinationForm = ({onSubmit}) => {
             destinationData.checkOutDate = values.date[1].format("YYYY-MM-DD");
             destinationData.rooms = values.numberOfRoom;
             destinationData.adults = values.numberOfAdult;
+            const total = parseInt(values.numberOfAdult) + parseInt(values.numberOfChild)
+            if (values.numberOfRoom==1) {
+                destinationData.guestNumber = `${total}`
+            } else if (values.numberOfRoom==2) {
+                destinationData.guestNumber = `${total}|${total}`
+            } else if (values.numberOfRoom==3) {
+                destinationData.guestNumber = `${total}|${total}|${total}`
+            } else {
+                destinationData.guestNumber = `${total}|${total}|${total}|${total}`
+            }
             destinationData.children = values.numberOfChild;
             //redux
             store.dispatch(setStartDate(values.date[0].format("YYYY-MM-DD")));

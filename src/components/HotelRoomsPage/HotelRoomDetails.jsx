@@ -2,7 +2,7 @@ import { useEffect, useState, React } from "react";
 import { Button, Card, Col, Row,  Image, Spin } from 'antd';
 import { StarFilled } from '@ant-design/icons'
 import parse from 'html-react-parser';
-import HotelMap from "../HotelMap";
+import HotelMap from "./HotelMap";
 import { store } from '../../store.js'
 const sleep = require('util').promisify(setTimeout)
 
@@ -52,7 +52,7 @@ const GetRoomDetails = async (hotelID) => {
     let res1 = await res.json();
     let i = 0;
     while (res1.rooms == null || res1.rooms ===[]) {
-        if (i ===5) {
+        if (i ===8) {
             break
         }
         i += 1
@@ -63,7 +63,7 @@ const GetRoomDetails = async (hotelID) => {
         });
         res1 = await res.json();
         (async () => {
-            await sleep(1000)
+            await sleep(500)
         })()
     }
     var seen = {};
@@ -189,7 +189,7 @@ const HotelRoomDetails = (props) => {
                 hotelRoomData.rooms.map((value) =>
                 <Col span={8} style={{padding:12}}>
                 
-                <Card title={value.roomNormalizedDescription} style={{ marginBottom:30, borderRadius: 10}} headStyle={{backgroundColor: '#20285d', color:"white"}}>
+                <Card title={value.roomNormalizedDescription} style={{ marginBottom:30, borderRadius: 10}} headStyle={{backgroundColor: '#20285d', color:"white", fontSize:"small"}}>
                     <div style={{height:'100%', boxSizing: 'border-box'}}>
                         {value.images !== [] &&
                         value.images[0] != null &&
@@ -207,9 +207,9 @@ const HotelRoomDetails = (props) => {
                             /> 
                         } 
 
-                        <Row style={{marginTop:12}}>
+                        <div style={{marginTop:12}}>
                             <span style={{fontSize: "medium"}}><b>${value.lowest_price}</b></span>
-                        </Row>
+                        </div>
                         <Row>
                             <Col span={12} offset={6} style={{marginTop: 12}}>
                                     <Button type="secondary" shape="default" size="large"  onClick={()=>
