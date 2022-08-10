@@ -4,7 +4,14 @@ from selenium.webdriver import Keys, ActionChains
 import time
 from destination_fuzzer import generate_test_input, validate_test_input, validate_test_result
 import random
-from date_fuzzer import get_dates
+import datetime
+
+
+def get_dates():
+    start_date = datetime.date.today() + datetime.timedelta(days=1)
+    end_date = start_date + datetime.timedelta(days=1)
+    return start_date.strftime('%Y-%m-%d'), end_date.strftime('%Y-%m-%d')
+
 
 DESTINATION_PATH = '//*[@id="destination"]'
 DATE_1_PATH = '//*[@id="date"]'
@@ -47,10 +54,10 @@ except AssertionError:
 DESTINATION_FIELD.clear()
 
 # DESTINATION_FIELD FUZZER GENERATED TESTS
-for _ in range(5):
+for _ in range(100):
     test_input = generate_test_input()
     DESTINATION_FIELD.send_keys(test_input)
-    time.sleep(1.5)
+    time.sleep(2)
     # Case 1: Input does not return any suggestions -> Verify if it really doesnt match any stored destinations
     if len(driver.find_elements(By.CLASS_NAME, 'rc-virtual-list')) == 0:
         try:
