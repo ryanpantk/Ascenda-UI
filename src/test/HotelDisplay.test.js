@@ -1,4 +1,4 @@
-import HotelDisplay from "../components/HotelDisplay.jsx";
+import HotelDisplay from "../components/HotelDisplay/HotelDisplay.jsx";
 import React from 'react';
 import renderer from 'react-test-renderer';
 require("@babel/core").transformSync("code", {

@@ -1,4 +1,4 @@
-import { GetHotelList,CallApi } from '../components/GetHotels';
+import { GetHotelList,CallApi } from '../components/HotelDisplay/GetHotels';
 import fetch from 'cross-fetch';
 
 const {destinationID,checkinDate,checkoutDate,guestNumber,partnerID} = {destinationID:'WD0M',checkinDate:'2022-09-01',checkoutDate:'2022-09-02',guestNumber:"1",partnerID:1};

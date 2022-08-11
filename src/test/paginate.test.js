@@ -1,4 +1,4 @@
-import {paginate} from '../components/paginate.js';
+import {paginate} from '../components/HotelDisplay/paginate.js';
 
 test('Pagination test', ()=>{
 const items = [];

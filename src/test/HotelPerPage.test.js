@@ -1,4 +1,4 @@
-import {HotelPerPage} from "../components/HotelPerPage.js";
+import {HotelPerPage} from "../components/HotelDisplay/HotelPerPage.js";
 import fetch from 'cross-fetch';
 import TestingHotelDetails from './../TestingHotelDetails';
 test('Empty Hotel Slicing test',async()=>{

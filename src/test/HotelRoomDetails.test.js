@@ -1,4 +1,4 @@
-import HotelRoomDetails from "../components/HotelRoomDetails/HotelRoomDetails";
+import HotelRoomDetails from "../components/HotelRoomsPage/HotelRoomDetails";
 import fetch from "cross-fetch";
 const hotelID = 'lXJq';
 

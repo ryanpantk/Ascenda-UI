@@ -1,4 +1,4 @@
-import DestinationForm from './../components/DestinationForm';
+import DestinationForm from './../components/DestinationPage/DestinationForm';
 import fetch from 'cross-fetch';
 
 async function fetchDestination(search) {
