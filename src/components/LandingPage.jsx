@@ -46,7 +46,7 @@ function LandingPage(){
                 </div>
                 <a onClick={()=>
                 {
-                    window.localStorage.setItem('path','/make-booking') 
+                    window.sessionStorage.setItem('path','/make-booking') 
                     window.location.reload()
                 }
                 }>
@@ -55,7 +55,7 @@ function LandingPage(){
                     </Button>      
                 </a>     
                 <a onClick={()=>                {
-                    window.localStorage.setItem('path','/delete-booking') 
+                    window.sessionStorage.setItem('path','/delete-booking') 
                     window.location.reload()
                 }} /* style={{fontSize: '16px', marginLeft:'16px', color:'#FFFFFF'}} */>
                     <Button style={buttonStyle2}>

@@ -46,7 +46,7 @@ export default function Navbar() {
     return (
         <nav style={navStyle}>
             <a style={hStyle} onClick={()=>                {
-                    window.localStorage.setItem('path','/') 
+                    window.sessionStorage.setItem('path','/') 
                     window.location.reload()
                 }} className="site-title">
                 Ascenda
@@ -54,13 +54,13 @@ export default function Navbar() {
             <ul style={ulStyle}>
                 <li>
                     <a style={aStyle} onClick={()=>                {
-                    window.localStorage.setItem('path','/make-booking') 
+                    window.sessionStorage.setItem('path','/make-booking') 
                     window.location.reload()
                 }}>Make Booking</a>
                 </li>
                 <li>
                     <a style={aStyle} onClick={()=>                {
-                    window.localStorage.setItem('path','/delete-booking') 
+                    window.sessionStorage.setItem('path','/delete-booking') 
                     window.location.reload()
                 }}>View Booking</a>
                 </li>
