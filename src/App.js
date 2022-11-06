@@ -7,7 +7,7 @@ import { Layout } from 'antd';
 const {Content } = Layout;
 
 function App() {
-  var pathName = window.location.pathname;
+  var pathName = window.localStorage.getItem("path");
   switch(pathName){
     default:
       return (

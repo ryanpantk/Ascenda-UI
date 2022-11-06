@@ -43,15 +43,15 @@ const navStyle = {
 export default function Navbar() {
     return (
         <nav style={navStyle}>
-            <a style={hStyle} href="/" className="site-title">
+            <a style={hStyle} onclick="window.localStorage.setItem('path','/')" href="/" className="site-title">
                 Ascenda
             </a>
             <ul style={ulStyle}>
                 <li>
-                    <a style={aStyle} href="/make-booking">Make Booking</a>
+                    <a style={aStyle} onclick="window.localStorage.setItem('path','/make-booking')" href="/make-booking">Make Booking</a>
                 </li>
                 <li>
-                    <a style={aStyle} href="/delete-booking">View Booking</a>
+                    <a style={aStyle} onclick="window.localStorage.setItem('path','/delete-booking')" href="/delete-booking">View Booking</a>
                 </li>
             </ul>
         </nav>
