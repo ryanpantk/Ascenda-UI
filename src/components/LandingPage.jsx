@@ -44,12 +44,20 @@ function LandingPage(){
                 <div style={{color: 'white', fontSize: '32px', fontWeight: '400', lineHeight: '35px'}}>
                     Book your perfect hotel <br/> stay in 4 simple steps.
                 </div>
-                <a onclick="window.localStorage.setItem('path','/make-booking')">
+                <a onClick={()=>
+                {
+                    window.localStorage.setItem('path','/make-booking') 
+                    window.location.reload()
+                }
+                }>
                     <Button style={buttonStyle1}>
                         Get Started Now
                     </Button>      
                 </a>     
-                <a onclick="window.localStorage.setItem('path','/delete-booking')" /* style={{fontSize: '16px', marginLeft:'16px', color:'#FFFFFF'}} */>
+                <a onClick={()=>                {
+                    window.localStorage.setItem('path','/delete-booking') 
+                    window.location.reload()
+                }} /* style={{fontSize: '16px', marginLeft:'16px', color:'#FFFFFF'}} */>
                     <Button style={buttonStyle2}>
                         View Bookings
                     </Button>      

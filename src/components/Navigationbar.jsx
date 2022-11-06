@@ -1,4 +1,5 @@
 //In-line CSS Styling
+import { Button } from 'antd';
 
 const ulStyle = {
     padding: '0',
@@ -40,18 +41,28 @@ const navStyle = {
   }
   
 
+
 export default function Navbar() {
     return (
         <nav style={navStyle}>
-            <a style={hStyle} onclick="window.localStorage.setItem('path','/')" className="site-title">
+            <a style={hStyle} onClick={()=>                {
+                    window.localStorage.setItem('path','/') 
+                    window.location.reload()
+                }} className="site-title">
                 Ascenda
             </a>
             <ul style={ulStyle}>
                 <li>
-                    <a style={aStyle} onclick="window.localStorage.setItem('path','/make-booking')">Make Booking</a>
+                    <a style={aStyle} onClick={()=>                {
+                    window.localStorage.setItem('path','/make-booking') 
+                    window.location.reload()
+                }}>Make Booking</a>
                 </li>
                 <li>
-                    <a style={aStyle} onclick="window.localStorage.setItem('path','/delete-booking')">View Booking</a>
+                    <a style={aStyle} onClick={()=>                {
+                    window.localStorage.setItem('path','/delete-booking') 
+                    window.location.reload()
+                }}>View Booking</a>
                 </li>
             </ul>
         </nav>
