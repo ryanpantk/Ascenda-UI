@@ -72,7 +72,7 @@ const DestinationForm = ({onSubmit}) => {
 
     async function fetchDestination(search) {
         search = search.replace(" ", "%20")
-        return fetch('http://localhost:5000/apis/destination/' + search)
+        return fetch('https://fluffy-granita-fe4f3b.netlify.app/apis/destination/' + search)
           .then((response) => response.json())
           .then((body) =>
             body.map((destination) => ({

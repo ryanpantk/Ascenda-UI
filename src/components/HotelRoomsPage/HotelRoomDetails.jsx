@@ -30,7 +30,7 @@ const contentStyleRoom = {
 };
 
 const GetHotelDetails = async (hotelID) => {
-    let res = await fetch(`http://localhost:5000/apis/hotelDetail/${hotelID}`);
+    let res = await fetch(`https://fluffy-granita-fe4f3b.netlify.app/apis/hotelDetail/${hotelID}`);
     const hotelDetails = await res.json();
     return hotelDetails;
 };
@@ -44,7 +44,7 @@ const GetRoomDetails = async (hotelID) => {
     let payload = {}
     payload.url = `https://hotelapi.loyalty.dev/api/hotels/${hotelID}/price?destination_id=${destination}&checkin=${checkinDate}&checkout=${checkoutDate}&lang=en_US&currency=SGD&guests=${guestNumber}&partner_id=1&country_code=SG`
 
-    const res = await fetch("http://localhost:5000/apis/hotelPrice", {
+    const res = await fetch("https://fluffy-granita-fe4f3b.netlify.app/apis/hotelPrice", {
         method: 'POST',
         headers: {'Content-Type':'application/json'}, // this line is important, if this content-type is not set it wont work
         body: JSON.stringify(payload)
@@ -56,7 +56,7 @@ const GetRoomDetails = async (hotelID) => {
             break
         }
         i += 1
-        const res = await fetch("http://localhost:5000/apis/hotelPrice", {
+        const res = await fetch("https://fluffy-granita-fe4f3b.netlify.app/apis/hotelPrice", {
             method: 'POST',
             headers: {'Content-Type':'application/json'}, // this line is important, if this content-type is not set it wont work
             body: JSON.stringify(payload)

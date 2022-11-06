@@ -5,7 +5,7 @@ const axios = require('axios');
 export async function stripeCheckout() {
 
     let StripePayload = { name: "Hotel", unit_amount: store.getState().roomPrice };
-    let resStripe = await axios.post('http://localhost:5000/apis/create-checkout-session', StripePayload)
+    let resStripe = await axios.post('https://fluffy-granita-fe4f3b.netlify.app/apis/create-checkout-session', StripePayload)
     let NodePayload = {
         salutation: store.getState().salutation,
         firstName: store.getState().firstName,
@@ -30,25 +30,25 @@ export async function stripeCheckout() {
     let data = resStripe.data;
     let {url, payment_intent} = data;
     NodePayload.stripeID = payment_intent;
-    await axios.post('http://localhost:5000/apis/postBooking', NodePayload);
+    await axios.post('https://fluffy-granita-fe4f3b.netlify.app/apis/postBooking', NodePayload);
     window.location = url;
 }
 
 export async function hotelListDetails(payload) {
-    const hotelListDetails = await fetch(`http://localhost:5000/apis/hotelsDetail/${payload}`);
+    const hotelListDetails = await fetch(`https://fluffy-granita-fe4f3b.netlify.app/apis/hotelsDetail/${payload}`);
     return hotelListDetails
 }
 
 export async function viewBooking(payload) {
-    const booking = axios.get("http://localhost:5000/apis/viewOneBooking/" + payload);
+    const booking = axios.get("https://fluffy-granita-fe4f3b.netlify.app/apis/viewOneBooking/" + payload);
     return booking;
 }
 
 export async function deleteInformation(payload) {
-    await axios.patch(`http://localhost:5000/apis//updateOneBooking/${payload}`, {});
+    await axios.patch(`https://fluffy-granita-fe4f3b.netlify.app/apis//updateOneBooking/${payload}`, {});
 }
 
 export async function checkBookingCredentials(payload) {
-    const checkBooking = axios.post("http://localhost:5000/apis/check-booking-credentials", payload);
+    const checkBooking = axios.post("https://fluffy-granita-fe4f3b.netlify.app/apis/check-booking-credentials", payload);
     return checkBooking;
 }

@@ -16,7 +16,7 @@ export async function HotelPerPage(props, HotelDetails){
         let hotel = HotelPriceList[i];
         let data = HotelDetails.find(item => item.id === hotel.id);
         if (data == null) {     
-            let res = await fetch(`http://localhost:5000/apis/hotelDetail/${hotel.id}`);
+            let res = await fetch(`https://fluffy-granita-fe4f3b.netlify.app/apis/hotelDetail/${hotel.id}`);
             data = await res.json();
         }
         if (data != null) {    

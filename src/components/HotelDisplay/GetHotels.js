@@ -10,7 +10,7 @@ const GetHotelList = async (props)=>{
 }
 
 const CallApi = async (payload)=>{
-    const prom = await fetch(`http://localhost:5000/apis/hotelsPrice/${payload.url}`);
+    const prom = await fetch(`https://fluffy-granita-fe4f3b.netlify.app/apis/hotelsPrice/${payload.url}`);
     return prom;
 }
 
