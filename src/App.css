@@ -70,7 +70,7 @@
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
-} */
+} 
 
 .destination {
   margin:8px;
@@ -166,10 +166,10 @@
 
 .ant-card {
   overflow-y: scroll;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
 }
-.ant-card::-webkit-scrollbar { /* WebKit */
+.ant-card::-webkit-scrollbar { 
   width: 0;
   height: 0;
 }
