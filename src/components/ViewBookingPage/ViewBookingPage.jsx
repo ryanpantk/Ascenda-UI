@@ -88,7 +88,7 @@ export default function DeleteBookingPage(){
                             <Form.Item name="bookingID" label="Booking ID" required>
                                 <Input placeholder="" />
                             </Form.Item>
-                            <Form.Item name="password" label="Passwords" required>
+                            <Form.Item name="password" label="Password " required>
                                 <Input placeholder="" />
                             </Form.Item>
                             <Button type="primary" shape="default" size="large" htmlType="submit" style={{width: "100%"}}>Show Booking</Button>
